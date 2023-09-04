@@ -1,0 +1,99 @@
+body {
+    color: aliceblue;
+}
+.background-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.37),rgba(0, 0, 0, 0.747)), url(/src/assets/images/font-registerPage.jpg);
+    height: 100vh;
+    width: 100%;
+    background-size:auto;
+    background-position:left;
+    justify-content: center;
+}
+
+.squareForm {
+    width: 65%;
+    height: 900px;
+    
+
+    background: #0a0a0ae8;
+    position: relative;
+
+    border: 10px;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+
+}
+
+.squareNews {
+    width: 35%;
+    height: 900px;
+    background-size:cover;
+    background-position: center;
+    position: relative;
+    top:0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.521),rgba(0, 0, 0, 0.822)), url(../assets/images/news-bg.jpg);
+    justify-content: center;
+    text-align: center;
+    
+    
+
+
+}
+.about {
+    top:40%;
+    position: relative;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+
+
+.squarePreview {
+    width: 350px;
+    height: 240px;
+    background-size:contain;
+    background-position: center;
+    top:350px;
+    left:60px;
+    position: absolute;
+    background-image: url(../assets/images/preview-icon.jpeg);
+}
+
+.preview {
+    width: 350px;
+    height: 240px;
+    top:350px;
+    left:60px;
+    position: absolute;
+}
+
+.mapPost-desing{
+    width: 450px;
+    height: 400px;
+    position: absolute;
+    top: 300px;
+    left: 600px;
+}
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(1, 3, 12);
+    
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #747474;
+    
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #686868;
+  }
