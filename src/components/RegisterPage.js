@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import {Icon} from 'leaflet';
+import axios from 'axios';
 
 //COMPONENTS
 import Header from './Header';
@@ -46,6 +47,23 @@ function RegisterPage() {
         const imageUrl = URL.createObjectURL(file);
         setPicture(imageUrl);
     }
+    };
+    
+    const prueba = () => {
+        const controllerLoc = "http://localhost/server/controller.php";
+        const data = {
+            mensaje:username
+        };
+        
+        axios.post(controllerLoc, data)
+        .then((response) => {
+            console.log(response);
+            console.log("si");
+        })
+        .catch((error) => {
+            console.error("Error", error);
+        });
+
     };
 
     
@@ -112,6 +130,8 @@ function RegisterPage() {
                                     </Marker>
                         
                                 </MapContainer>
+
+                                <button style={{position:"absolute", top:"10px"}} onClick={prueba}>asd</button>
                                                     
                             </div>
                             <div className="squareNews">
