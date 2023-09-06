@@ -13,13 +13,7 @@ export default function Header() {
                 </div>
             </div>
             <div className="header-navbar">
-                    <button>INICIO</button>
-                    <button>¿Quienes somos?</button>
-                    <button>¿Que es Bioacústica?</button>
-                    <button>Divulgacion</button>
-                    <button>Desierto Chihuahuense</button>
-                    <button>Simposio</button>
-                    <button>Términos de uso</button>
+                    <button className="header-navbar-buttons">INICIO</button>
             </div>
         </nav>
 

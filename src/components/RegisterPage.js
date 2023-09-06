@@ -65,7 +65,17 @@ function RegisterPage() {
         });
 
     };
-
+/*
+    const verifyLoc = () => {
+        if (lat != 0 & long != 0) {
+            return position;
+        }
+        else {
+            const cr = [9.748917, -83.753428];
+            return cr;
+        }
+    }
+*/
     
 
     return(
@@ -77,12 +87,11 @@ function RegisterPage() {
                 <div>
                         <main style={{display:"flex"}}>
                             <div className="squareForm">
-                                <h2 style={{position:'absolute',top:"10px", left:"60px"}}>Informacion de la publicacion</h2>
+                                <h2 style={{position:'absolute', top:"0px", left:"60px"}}>Informacion de la publicacion</h2>
                                 <label for="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Titulo de la publicacion</label>      
-                                <input id="namePost" value={namePost} onChange={(e) => {setNamePost(e.target.value)}} style={{position:'absolute',top:"110px", left:"60px"}} required></input>
+                                <input className="register-title-input" id="namePost" value={namePost} onChange={(e) => {setNamePost(e.target.value)}} style={{position:'absolute',top:"110px", left:"60px"}} placeholder='Ej: Sonidos de Cartago' required ></input>
 
-                                <label for="namePost" style={{position:'absolute',top:"160px", left:"60px"}}>Archivo de sonido (50MB MAX) (MP3, WAV, OGG)
-                                </label>      
+                                <label for="namePost" style={{position:'absolute',top:"160px", left:"60px"}}>Archivo de sonido (50MB MAX) (MP3, WAV, OGG)</label>      
                                 <input id="namePost" type="file" accept="audio/*" onChange={handleAudioSelect} style={{position:'absolute',top:"190px", left:"60px"}}></input>
                                 {sound && (
                                     <audio controls style={{position:'absolute',top:"220px", left:"60px"}} className="player-desing">
@@ -100,23 +109,23 @@ function RegisterPage() {
                                     <img className="preview" src={picture} alt="Vista previa de la imagen" />
                                 )}
                                 <label for="namePost" style={{position:'absolute',top:"610px", left:"60px"}}>Detalles o comentarios</label>      
-                                <textarea id="namePost" value={postDetails} onChange={(e) => {setPostDetails(e.target.value)}} style={{position:'absolute',top:"650px", left:"60px"}} rows="15" cols="45"></textarea>
+                                <textarea className='register-details' id="namePost" value={postDetails} onChange={(e) => {setPostDetails(e.target.value)}} style={{position:'absolute',top:"640px", left:"60px"}} rows="11" cols="41" placeholder='Cuentenos la historia de su sonido pura vida.'></textarea>
 
                                 {/** FORM DIVISION, POST INFO UP - USER INFO DOWN   */}
                                 
-                                <h2 style={{position:'absolute',top:"10px", left:"600px"}}>Informacion de Autor</h2>
-                                <label for="namePost" style={{position:'absolute',top:"80px", left:"600px"}}>Nombre de autor</label>      
-                                <input id="namePost" value={username} onChange={(e) => {setUsername(e.target.value)}} style={{position:'absolute',top:"110px", left:"600px"}}></input>
+                                <h2 style={{position:'absolute',top:"0px", left:"600px"}}>Informacion de Autor</h2>
+                                <label for="namePost" style={{position:'absolute',top:"80px", left:"600px"}}>Nombre del autor</label>      
+                                <input className="register-user-loc-input" id="namePost" value={username} onChange={(e) => {setUsername(e.target.value)}} style={{position:'absolute',top:"110px", left:"600px"}} placeholder='Ej: Carlos'></input>
 
-                                <label for="namePost" style={{position:'absolute',top:"80px", left:"860px"}}>Primer Apellido</label>      
-                                <input id="namePost" value={lastname} onChange={(e) => {setLastName(e.target.value)}} style={{position:'absolute',top:"110px", left:"860px"}}></input>
+                                <label for="namePost" style={{position:'absolute',top:"80px", left:"930px"}}>Primer Apellido</label>      
+                                <input className="register-user-loc-input" id="namePost" value={lastname} onChange={(e) => {setLastName(e.target.value)}} style={{position:'absolute',top:"110px", left:"930px"}} placeholder='Ej: Ramirez'></input>
 
                                 <h2 style={{position:'absolute',top:"135px", left:"600px"}}>Ubicacion</h2>
                                 <label for="namePost" style={{position:'absolute',top:"200px", left:"600px"}}>Latitud</label>      
-                                <input id="namePost" value={lat} onChange={(e) => {setLat(parseFloat(e.target.value))}} style={{position:'absolute',top:"240px", left:"600px"}}></input>
+                                <input className="register-user-loc-input" id="namePost" value={lat} onChange={(e) => {setLat(parseFloat(e.target.value))}} style={{position:'absolute',top:"230px", left:"600px"}} placeholder='asda'></input>
 
-                                <label for="namePost" style={{position:'absolute',top:"200px", left:"860px"}}>Longitud</label>      
-                                <input id="namePost" value={long} onChange={(e) => {setLong(parseFloat(e.target.value))}} style={{position:'absolute',top:"240px", left:"860px"}}></input>
+                                <label for="namePost" style={{position:'absolute',top:"200px", left:"930px"}}>Longitud</label>      
+                                <input className="register-user-loc-input" id="namePost" value={long} onChange={(e) => {setLong(parseFloat(e.target.value))}} style={{position:'absolute',top:"230px", left:"930px"}}></input>
 
                                 <MapContainer className="mapPost-desing" center={position} zoom={zoom}>
                                     <TileLayer
@@ -131,19 +140,19 @@ function RegisterPage() {
                         
                                 </MapContainer>
 
-                                <button style={{position:"absolute", top:"10px"}} onClick={prueba}>asd</button>
+                                <button style={{position:"relative", top:"800px", left:"700px"}} onClick={prueba}>Guardar</button>
                                                     
                             </div>
                             <div className="squareNews">
-                                <p className='about'>El I Simposio Nacional de Bioacústica se realiza en el contexto del Año Internacional del Sonido 2020 —
-                                    una iniciativa global sobre la importancia del sonido en todos los aspectos de la vida en la Tierra—, y ha
-                                    sido declarado de Interés Institucional por el Consejo de Rectoría de la Universidad Estatal a Distancia,
-                                    Costa Rica.
-                                    Con el objetivo común de "Promover la investigación, la divulgación y el conocimiento de los sonidos
-                                    naturales y los entornos acústicos de Costa Rica", este simposio se presenta como una actividad gratuita y
-                                    abierta al público, transmitida de forma virtual para brindar una oportunidad que facilite el acceso y la
-                                    distribución del conocimiento sobre este vasto campo temático, el cual ha experimentado un auge
-                                    importante durante los últimos años de la mano con el desarrollo de nueva tecnología</p>
+                                <div className="squareNews-inside1">
+                                    <h1 className="h1-preview">LOS SONIDOS DEL PURA VIDA</h1>
+                                </div>
+                                <div className="squareNews-inside2">
+                                    <p>“Los sonidos del Pura Vida” consiste en un mapa sonoro de Costa Rica, con el objetivo de crear una memoria de sonidos de nuestro país.</p>
+                                    <button>Explorar</button>
+                                </div>
+                                
+                                
                             </div>
                         </main>
                         

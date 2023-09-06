@@ -15,10 +15,10 @@ body {
     height: 900px;
     
 
-    background: #0a0a0ae8;
+    color: black;
     position: relative;
 
-    border: 10px;
+
     font-family: 'Lato', sans-serif;
     font-size: 18px;
 
@@ -27,16 +27,32 @@ body {
 .squareNews {
     width: 35%;
     height: 900px;
-    background-size:cover;
-    background-position: center;
     position: relative;
-    top:0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.521),rgba(0, 0, 0, 0.822)), url(../assets/images/news-bg.jpg);
-    justify-content: center;
-    text-align: center;
-    
-    
+    display:grid;
+    grid-template-rows: 70% 30%;
+}
 
+.squareNews-inside1 {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-size:cover;
+  background-position: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.37),rgba(0, 0, 0, 0.747)), url(/src/assets/images/news-bg.jpg);
+  text-align: center;
+
+
+
+}
+.squareNews-inside2 {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(13, 20, 54);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 
 }
 .about {
@@ -48,18 +64,21 @@ body {
 
 
 .squarePreview {
-    width: 350px;
+    width: 405px;
     height: 240px;
-    background-size:contain;
+    background-size:cover;
     background-position: center;
     top:350px;
     left:60px;
     position: absolute;
     background-image: url(../assets/images/preview-icon.jpeg);
+    border-color: black;
 }
 
+
+
 .preview {
-    width: 350px;
+    width: 405px;
     height: 240px;
     top:350px;
     left:60px;
@@ -67,12 +86,41 @@ body {
 }
 
 .mapPost-desing{
-    width: 450px;
+    width: 590px;
     height: 400px;
     position: absolute;
     top: 300px;
     left: 600px;
 }
+
+.h1-preview {
+    font-family: 'Lato', sans-serif;
+    font-style: bold;
+    top:30%;
+    font-size: 60px;
+    position: relative;
+}
+
+.register-title-input {
+  width: 400px;
+  height: 25px;
+  
+}
+
+.register-user-loc-input {
+  width: 250px;
+  height: 25px;
+}
+
+.register-title-input, .register-user-loc-input {
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+.register-details {
+  font-family: 'Lato', sans-serif;
+}
+
 
   /* width */
   ::-webkit-scrollbar {
