@@ -87,7 +87,7 @@ function RegisterPage() {
                 <div>
                         <main style={{display:"flex"}}>
                             <div className="squareForm">
-                                <h2 style={{position:'absolute', top:"0px", left:"60px"}}>Informacion de la publicacion</h2>
+                                <h2 style={{position:'absolute', top:"0px", left:"60px"}}>Informacin de la publicacion</h2>
                                 <label for="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Titulo de la publicacion</label>      
                                 <input className="register-title-input" id="namePost" value={namePost} onChange={(e) => {setNamePost(e.target.value)}} style={{position:'absolute',top:"110px", left:"60px"}} placeholder='Ej: Sonidos de Cartago' required ></input>
 
@@ -140,7 +140,7 @@ function RegisterPage() {
                         
                                 </MapContainer>
 
-                                <button style={{position:"relative", top:"800px", left:"700px"}} onClick={prueba}>Guardar</button>
+                                <button className="register-button" style={{position:"relative", top:"830px", left:"1090px"}} onClick={prueba}>GUARDAR</button>
                                                     
                             </div>
                             <div className="squareNews">
@@ -149,7 +149,7 @@ function RegisterPage() {
                                 </div>
                                 <div className="squareNews-inside2">
                                     <p>“Los sonidos del Pura Vida” consiste en un mapa sonoro de Costa Rica, con el objetivo de crear una memoria de sonidos de nuestro país.</p>
-                                    <button>Explorar</button>
+                                    <button className="explore-button">Explorar</button>
                                 </div>
                                 
                                 

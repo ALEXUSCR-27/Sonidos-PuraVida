@@ -8,7 +8,7 @@
     position: relative;
     justify-content: center;
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 
 }
 
@@ -18,9 +18,10 @@
     height: 70px;
     bottom: 0;
     justify-content: center;
-    border: 1px solid black;
+     
     align-items: center;
     display: flex;
+    background-color: #364c7e;
 
 
 }
@@ -45,7 +46,7 @@
     height: 70px;
     font-size: 20px;
     background-color: unset;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-bottom: 0;
     border-top: 0;
     border: 2px #d9e3ec;
@@ -53,7 +54,7 @@
 
 
 .footer {
-    background-color:#131010;
+    background-color:#0a0909;
     color: white;
     padding: 20px;
     text-align: center;
