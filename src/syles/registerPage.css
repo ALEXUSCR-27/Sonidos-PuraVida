@@ -128,6 +128,12 @@ body {
     position: relative;
 }
 
+.h3-register {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+}
+
 .register-title-input {
   width: 400px;
   height: 25px;

@@ -49,13 +49,20 @@ function RegisterPage() {
     }
     };
     
-    const prueba = () => {
-        const controllerLoc = "http://localhost/server/controller.php";
+    const registerPost = () => {
+        const route = "http://localhost:8000/routes.php?action=registerPost";
         const data = {
-            mensaje:username
+            namePost:namePost,
+            sound:sound,
+            picture:picture,
+            username:username,
+            lastname:lastname,
+            postDetails:postDetails,
+            lat:lat,
+            long:long
         };
-        
-        axios.post(controllerLoc, data)
+        console.log(data);
+        axios.post(route, data)
         .then((response) => {
             console.log(response);
             console.log("si");
@@ -65,19 +72,7 @@ function RegisterPage() {
         });
 
     };
-/*
-    const verifyLoc = () => {
-        if (lat != 0 & long != 0) {
-            return position;
-        }
-        else {
-            const cr = [9.748917, -83.753428];
-            return cr;
-        }
-    }
-*/
     
-
     return(
         <div>
             <div>
@@ -87,7 +82,7 @@ function RegisterPage() {
                 <div>
                         <main style={{display:"flex"}}>
                             <div className="squareForm">
-                                <h2 style={{position:'absolute', top:"0px", left:"60px"}}>Informacin de la publicacion</h2>
+                                <h3 className="h3-register" style={{position:'absolute', top:"0px", left:"60px"}}>Informacion de la publicacion</h3>
                                 <label for="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Titulo de la publicacion</label>      
                                 <input className="register-title-input" id="namePost" value={namePost} onChange={(e) => {setNamePost(e.target.value)}} style={{position:'absolute',top:"110px", left:"60px"}} placeholder='Ej: Sonidos de Cartago' required ></input>
 
@@ -120,7 +115,7 @@ function RegisterPage() {
                                 <label for="namePost" style={{position:'absolute',top:"80px", left:"930px"}}>Primer Apellido</label>      
                                 <input className="register-user-loc-input" id="namePost" value={lastname} onChange={(e) => {setLastName(e.target.value)}} style={{position:'absolute',top:"110px", left:"930px"}} placeholder='Ej: Ramirez'></input>
 
-                                <h2 style={{position:'absolute',top:"135px", left:"600px"}}>Ubicacion</h2>
+                                <h3 className='h3-register' style={{position:'absolute',top:"135px", left:"600px"}}>Ubicacion</h3>
                                 <label for="namePost" style={{position:'absolute',top:"200px", left:"600px"}}>Latitud</label>      
                                 <input className="register-user-loc-input" id="namePost" value={lat} onChange={(e) => {setLat(parseFloat(e.target.value))}} style={{position:'absolute',top:"230px", left:"600px"}} placeholder='asda'></input>
 
@@ -140,7 +135,7 @@ function RegisterPage() {
                         
                                 </MapContainer>
 
-                                <button className="register-button" style={{position:"relative", top:"830px", left:"1090px"}} onClick={prueba}>GUARDAR</button>
+                                <button className="register-button" style={{position:"relative", top:"830px", left:"1090px"}} onClick={registerPost}>GUARDAR</button>
                                                     
                             </div>
                             <div className="squareNews">
