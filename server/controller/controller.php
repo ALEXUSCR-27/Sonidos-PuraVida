@@ -1,8 +1,16 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Content-Type: text/html; charset=utf-8");
-$method = $_SERVER['REQUEST_METHOD'];
+include "../model/model.php";
+
+function registerPost($data) {
+    //validar recaptcha
+    registerPostInDB($data);
+    
+    //header('Content-Type: application/json');
+    //echo json_encode(array('conectado'=>true, 'todo good'));
+}
+
+/*
+
 
 include "server.php";
 $mysqli = connectDB();
@@ -35,7 +43,7 @@ $mysqli = connectDB();
 
 //header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
-/*header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 include 'server.php'; // Incluye el archivo de conexión.
 
