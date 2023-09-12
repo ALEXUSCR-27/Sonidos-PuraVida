@@ -12,17 +12,44 @@ function registerPostInDB($data) {
     $long = $data["long"];
 
     //echo json_encode(array("mensaje"=>"llego bien", "user"=>$lat));
-
+    try {
     
-    $connection = connectDB();
-    if ($connection != null) {
+   
         
-        $sql = "SELECT * FROM Provincias;";
-        $stmt = $connection->prepare($sql);
-        $stmt->execute();
-        echo json_encode($stmt);
+        $sql = "SELECT * FROM Administradores;";
+        $stmt = connectDB();
+        $result = $stmt->query($sql);
+            print("exito");
+            if ($result->num_rows > 0) {
+                echo json_encode(array('conectado'=>true, 'todo good'));
+                // Crear un array para almacenar los resultados
+                $mensajes = array();
+        
+                // Iterar a través de los resultados y agregarlos al array
+                while ($row = $result->fetch_assoc()) {
+                    $mensajes[] = $row;
+                }
+        
+                // Devolver los resultados como JSON al frontend
+                header('Content-Type: application/json');
+                echo json_encode($mensajes);
+         }
+        
+        //$stmt->execute();
+        //$resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
 
+        //foreach ($resultados as $fila) {
+        //    echo "ID: " . $fila['id'] . "<br>";
+        //    echo "Nombre: " . $fila['nombre'] . "<br>";
+        //    echo "Correo: " . $fila['correo'] . "<br>";
+        //    echo "<hr>";
+        //}
 
+    }
+    catch (PDOException $e) {
+        echo "Error de consulta: " . $e->getMessage();
+    }
 
     
         /*
@@ -41,11 +68,8 @@ function registerPostInDB($data) {
             echo "Error al ejecutar la consulta: " . $stmt->errorInfo()[2];
         }*/
 
-    }
-    else {
-        echo json_encode(array("mensaje"=>"error"));
-    }
-    $connection->close();
+    
+
 }
 
 ?>

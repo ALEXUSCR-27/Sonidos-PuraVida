@@ -8,7 +8,6 @@ header("Content-Type: text/html; charset=utf-8");
 $JSONData = file_get_contents("php://input");
 $data = json_decode($JSONData, true);
 
-
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     if ($action === 'registerPost') {
