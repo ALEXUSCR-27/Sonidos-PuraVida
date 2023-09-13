@@ -50,7 +50,7 @@ function RegisterPage() {
     };
     
     const registerPost = () => {
-        const route = "http://localhost:8000/routes.php?action=registerPost";
+        const route = "http://localhost:8000/router/routes.php?action=registerPost";
         const data = {
             namePost:namePost,
             sound:sound,
