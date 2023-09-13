@@ -79,12 +79,13 @@ CREATE TABLE `Publicaciones` (
   `descripcion` varchar(255) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `nombreAutor` varchar(60) DEFAULT NULL,
+  `ApellidoAutor` varchar(60) DEFAULT NULL,
   `sonido` varchar(255) DEFAULT NULL,
   `fotografia` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`codigoPublicacion`),
   KEY `codigoProvincia` (`codigoProvincia`),
   CONSTRAINT `Publicaciones_ibfk_1` FOREIGN KEY (`codigoProvincia`) REFERENCES `Provincias` (`codigoProvincia`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,6 @@ CREATE TABLE `Publicaciones` (
 
 LOCK TABLES `Publicaciones` WRITE;
 /*!40000 ALTER TABLE `Publicaciones` DISABLE KEYS */;
-INSERT INTO `Publicaciones` VALUES (5,1,'TÃ­tulo de la PublicaciÃ³n','\0\0\0\0\0\0\0mýôŸ5?$@®Ÿþ³æUÀ','DescripciÃ³n de la publicaciÃ³n','2023-08-31','Nombre del Autor','Sonido','Foto'),(7,7,'TÃ­tulo de la PublicaciÃ³n 2','\0\0\0\0\0\0\0mýôŸ5?\"@®Ÿþ³æUÀ','DescripciÃ³n de la publicaciÃ³n','2023-08-31','Autor 2','url/Sonido','url/Foto');
 /*!40000 ALTER TABLE `Publicaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,12 +311,13 @@ CREATE DEFINER=`admin`@`localhost` PROCEDURE `procedureInsertarPublicacion`(
     IN descrip VARCHAR(255),
     IN fechaPublicacion DATE,
     IN autor VARCHAR(60),
+    IN apellido VARCHAR(60),
     IN sonido VARCHAR(255),
     IN foto VARCHAR(255)
 )
 BEGIN
-    INSERT INTO Publicaciones (codigoProvincia, titulo, ubicacion, descripcion, fecha, nombreAutor, sonido, fotografia)
-    VALUES (codigoProv, tit, POINT(latitud, longitud), descrip, fechaPublicacion, autor, sonido, foto);
+    INSERT INTO Publicaciones (codigoProvincia, titulo, ubicacion, descripcion, fecha, nombreAutor, apellidoAutor, sonido, fotografia)
+    VALUES (codigoProv, tit, POINT(latitud, longitud), descrip, fechaPublicacion, autor, apellido, sonido, foto);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -403,4 +404,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-08 22:00:35
+-- Dump completed on 2023-09-12 21:48:12
