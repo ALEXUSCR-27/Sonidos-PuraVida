@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ce094301.css",
+    "main.js": "/static/js/main.2a3058e7.js",
+    "static/js/787.104a5c84.chunk.js": "/static/js/787.104a5c84.chunk.js",
+    "static/media/costarica-news.jpg": "/static/media/costarica-news.25a2a1d69c0699a80b9a.jpg",
+    "static/media/font-registerPage.jpg": "/static/media/font-registerPage.7bbe92a104c7a26318af.jpg",
+    "static/media/BannerSonidos.png": "/static/media/BannerSonidos.8948b2aa1c855543b58a.png",
+    "index.html": "/index.html",
+    "main.ce094301.css.map": "/static/css/main.ce094301.css.map",
+    "main.2a3058e7.js.map": "/static/js/main.2a3058e7.js.map",
+    "787.104a5c84.chunk.js.map": "/static/js/787.104a5c84.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ce094301.css",
+    "static/js/main.2a3058e7.js"
+  ]
+}
