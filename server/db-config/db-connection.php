@@ -1,22 +1,22 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "Smand.com2772";
-$database = "sonidos-puravida";
-
+const servername = "localhost";
+const username = "admin";
+const password = "sonidos_puravida-uned_2023";
+const database = "sonidos-puravida";
 
 function connectDB() {
-    $servername = "localhost";
-    $username = "root";
-    $password = "Smand.com2772";
-    $database = "sonidos-puravida";
-
-    $conn = new mysqli($servername, $username, $password, $database);
-    if ($conn){
-        return $conn;
+    try {
+        $connection = new mysqli(servername, username, password, database);
+        if ($connection){
+            return $connection;
+        }
+        else {
+            throw new Exception("Database error connection: " . $connection->connect_error);
+            return null;
+        }
     }
-    else {
-        return null;
+    catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
     }
     
 }
