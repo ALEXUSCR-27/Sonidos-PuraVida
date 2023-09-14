@@ -2,74 +2,60 @@
 include "../db-config/db-connection.php";
 
 function registerPostInDB($data) {
+
     $namePost = $data["namePost"];
     $sound = $data["sound"];
     $picture = $data["picture"]; 
     $username = $data["username"];
     $lastname = $data["lastname"];
     $postDetails = $data["postDetails"];
-    $lat = $data["lat"];
-    $long = $data["long"];
-
-    //echo json_encode(array("mensaje"=>"llego bien", "user"=>$lat));
+    $lat = (double)$data["lat"];
+    $long = (double)$data["long"];
+    $codigoProvincia = 1;
+    $actual_date = date("Y-m-d");
     try {
-    
-   
-        
-        $sql = "SELECT * FROM Administradores;";
+        $sql_query = "CALL procedureInsertarPublicacion($codigoProvincia, '$namePost', $lat, $long, '$postDetails', '$actual_date', '$username', '$lastname', '$sound', '$picture');";
+        echo json_encode(array("consulta"=>$sql_query));
         $stmt = connectDB();
-        $result = $stmt->query($sql);
-            print("exito");
-            if ($result->num_rows > 0) {
-                echo json_encode(array('conectado'=>true, 'todo good'));
-                // Crear un array para almacenar los resultados
-                $mensajes = array();
-        
-                // Iterar a través de los resultados y agregarlos al array
-                while ($row = $result->fetch_assoc()) {
-                    $mensajes[] = $row;
-                }
-        
-                // Devolver los resultados como JSON al frontend
-                header('Content-Type: application/json');
-                echo json_encode($mensajes);
-         }
-        
-        //$stmt->execute();
-        //$resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-
-        //foreach ($resultados as $fila) {
-        //    echo "ID: " . $fila['id'] . "<br>";
-        //    echo "Nombre: " . $fila['nombre'] . "<br>";
-        //    echo "Correo: " . $fila['correo'] . "<br>";
-        //    echo "<hr>";
-        //}
+        $stmt->query($sql_query);
+        if(!$stmt) {
+            die("Error en la consulta: " . mysqli_error($stmt));
+        }
+        $stmt->close();
 
     }
     catch (PDOException $e) {
         echo "Error de consulta: " . $e->getMessage();
     }
 
-    
-        /*
-        $sql_query = "CALL procedureInsertarPublicacion (:codigoProvincia, :titulo, :descripcion, :fecha, :nombreAutor, :sonido, :foto";
-        $stmt = $connection->prepare($sql_query);
-        $stmt->bindParam(':codigoProvincia', $codigoProvincia, PDO::PARAM_INT);
-        $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
-        $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
-        $stmt->bindParam(':fecha', $fecha, PDO::PARAM_STR);
-        $stmt->bindParam(':nombreAutor', $nombreAutor, PDO::PARAM_STR);
-        $stmt->bindParam(':sonido', $sonido, PDO::PARAM_STR);
-        $stmt->bindParam(':foto', $foto, PDO::PARAM_STR);
-        if ($stmt->execute()) {
-            echo "La llamada al procedimiento almacenado se realizó correctamente.";
-        } else {
-            echo "Error al ejecutar la consulta: " . $stmt->errorInfo()[2];
-        }*/
+}
 
-    
+function getPostFromDB() {
+    try {
 
+        $sql_query = "SELECT * FROM Publicaciones;";
+        $stmt = connectDB();
+        $result = $stmt->query($sql_query);
+         
+        if(!$stmt) {
+            die("Error en la consulta: " . mysqli_error($stmt));
+        }
+        $posts = array();
+        if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"], "descripcion"=>$row["descripcion"]);
+                }
+                
+         }
+
+        $stmt->close();
+        header('Content-Type: application/json');
+        echo json_encode($posts);
+
+    }
+    catch (PDOException $e) {
+        echo "Error de consulta: " . $e->getMessage();
+    }
 }
 
 ?>

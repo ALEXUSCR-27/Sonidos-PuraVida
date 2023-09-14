@@ -12,7 +12,9 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
     if ($action === 'registerPost') {
         registerPost($data);
-        //echo json_encode(array('conectado'=>true, 'si pa'=>$_SERVER));
+    }
+    if ($action === 'getPost') {
+        getPost();
     }
     
 }
