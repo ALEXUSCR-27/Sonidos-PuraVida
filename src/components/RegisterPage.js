@@ -29,6 +29,9 @@ function RegisterPage() {
     const [zoom] = useState(7);
     const position = [lat, long];
 
+    const [mostrarExito, setMostrarExito] = useState(false);
+    const [mostrarError, setMostrarError] = useState(false);
+
 
     const handleAudioSelect = (event) => {
         const file = event.target.files[0];
@@ -67,7 +70,7 @@ function RegisterPage() {
         axios.post(route, data)
         .then((response) => {
             console.log(response);
-            console.log("si");
+            alert("Registro Exitoso");
         })
         .catch((error) => {
             console.error("Error", error);
@@ -88,6 +91,7 @@ function RegisterPage() {
         }
         
     }
+
     
     return(
         <div>
@@ -121,7 +125,6 @@ function RegisterPage() {
                                 )}
                                 <label for="namePost" style={{position:'absolute',top:"610px", left:"60px"}}>Detalles o comentarios</label>      
                                 <textarea className='register-details' id="namePost" value={postDetails} onChange={(e) => {setPostDetails(e.target.value)}} style={{position:'absolute',top:"640px", left:"60px"}} rows="11" cols="41" placeholder='Cuentenos la historia de su sonido pura vida.'></textarea>
-
                                 {/** FORM DIVISION, POST INFO UP - USER INFO DOWN   */}
                                 
                                 <h3 className="h3-register" style={{position:'absolute',top:"15px", left:"600px"}}>Informacion del Autor</h3>
