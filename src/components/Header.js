@@ -1,5 +1,6 @@
 //LIBRARIES
 import { Link } from "react-router-dom";
+import React from "react";
 
 //STYLES
 import '../syles/general.css';
@@ -13,7 +14,10 @@ export default function Header() {
                 </div>
             </div>
             <div className="header-navbar">
-                    <button className="header-navbar-buttons">INICIO</button>
+                    <Link to="http://localhost:3000/">
+                        <button className="header-navbar-buttons">INICIO</button>
+                    </Link>
+                    
             </div>
         </nav>
 

@@ -1,7 +1,6 @@
 //LIBRARIES
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import {Icon} from 'leaflet';
 import axios from 'axios';
 
 //COMPONENTS
@@ -14,6 +13,9 @@ import "../syles/general.css";
 
 
 function RegisterPage() {
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll al principio de la página en la carga
+      }, []);
 
     //STATE VALUES
     const [namePost, setNamePost] = useState("");
@@ -34,7 +36,7 @@ function RegisterPage() {
           // Validar que el archivo sea de tipo audio si lo deseas
           if (file.type.startsWith("audio/")) {
             setSound(URL.createObjectURL(file));
-            console.log(sound);
+            console.log("sound");
           } else {
             alert("Selecciona un archivo de audio válido.");
           }
@@ -50,7 +52,7 @@ function RegisterPage() {
     };
     
     const registerPost = () => {
-        const route = "http://localhost:8000/router/routes.php?action=registerPost";
+        const route = "http://localhost/router/routes.php?action=registerPost";
         const data = {
             namePost:namePost,
             sound:sound,
@@ -72,6 +74,20 @@ function RegisterPage() {
         });
 
     };
+
+    const handleLatitud = (e) => {
+        if (e.target.value != "" & e.target.value != ".") {
+            setLat(parseFloat(e.target.value));
+        }
+        
+    }
+
+    const handleLong = (e) => {
+        if (e.target.value != "" & e.target.value != "-" & e.target.value != ".") {
+            setLong(parseFloat(e.target.value));
+        }
+        
+    }
     
     return(
         <div>
@@ -82,7 +98,7 @@ function RegisterPage() {
                 <div>
                         <main style={{display:"flex"}}>
                             <div className="squareForm">
-                                <h3 className="h3-register" style={{position:'absolute', top:"0px", left:"60px"}}>Informacion de la publicacion</h3>
+                                <h3 className="h3-register" style={{position:'absolute', top:"15px", left:"60px"}}>Informacion de la publicacion</h3>
                                 <label for="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Titulo de la publicacion</label>      
                                 <input className="register-title-input" id="namePost" value={namePost} onChange={(e) => {setNamePost(e.target.value)}} style={{position:'absolute',top:"110px", left:"60px"}} placeholder='Ej: Sonidos de Cartago' required ></input>
 
@@ -108,7 +124,7 @@ function RegisterPage() {
 
                                 {/** FORM DIVISION, POST INFO UP - USER INFO DOWN   */}
                                 
-                                <h2 style={{position:'absolute',top:"0px", left:"600px"}}>Informacion de Autor</h2>
+                                <h3 className="h3-register" style={{position:'absolute',top:"15px", left:"600px"}}>Informacion del Autor</h3>
                                 <label for="namePost" style={{position:'absolute',top:"80px", left:"600px"}}>Nombre del autor</label>      
                                 <input className="register-user-loc-input" id="namePost" value={username} onChange={(e) => {setUsername(e.target.value)}} style={{position:'absolute',top:"110px", left:"600px"}} placeholder='Ej: Carlos'></input>
 
@@ -117,10 +133,10 @@ function RegisterPage() {
 
                                 <h3 className='h3-register' style={{position:'absolute',top:"135px", left:"600px"}}>Ubicacion</h3>
                                 <label for="namePost" style={{position:'absolute',top:"200px", left:"600px"}}>Latitud</label>      
-                                <input className="register-user-loc-input" id="namePost" value={lat} onChange={(e) => {setLat(parseFloat(e.target.value))}} style={{position:'absolute',top:"230px", left:"600px"}} placeholder='asda'></input>
+                                <input className="register-user-loc-input" id="namePost" value={lat} onChange={(e) => handleLatitud(e)} style={{position:'absolute',top:"230px", left:"600px"}}></input>
 
                                 <label for="namePost" style={{position:'absolute',top:"200px", left:"930px"}}>Longitud</label>      
-                                <input className="register-user-loc-input" id="namePost" value={long} onChange={(e) => {setLong(parseFloat(e.target.value))}} style={{position:'absolute',top:"230px", left:"930px"}}></input>
+                                <input type='text' className="register-user-loc-input"  id="namePost" value={long} onChange={(e) => handleLong(e)} style={{position:'absolute',top:"230px", left:"930px"}}></input>
 
                                 <MapContainer className="mapPost-desing" center={position} zoom={zoom}>
                                     <TileLayer
