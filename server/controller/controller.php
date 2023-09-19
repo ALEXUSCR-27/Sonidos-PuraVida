@@ -12,7 +12,7 @@ function getPost() {
     getPostFromDB();
 }
 
-
+//probando smart commits
 
 
 ?>
