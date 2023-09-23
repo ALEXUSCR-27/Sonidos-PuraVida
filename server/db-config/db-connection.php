@@ -2,7 +2,7 @@
 const servername = "localhost";
 const username = "admin";
 const password = "sonidos_puravida-uned_2023";
-const database = "sonidos-puravida";
+const database = "sonidos_puravida";
 
 function connectDB() {
     try {
