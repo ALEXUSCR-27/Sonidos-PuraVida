@@ -43,7 +43,7 @@ function getPostFromDB() {
         $posts = array();
         if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]. $row["ApellidoAutor"], "descripcion"=>$row["descripcion"]);
+                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]." ". $row["ApellidoAutor"], "descripcion"=>$row["descripcion"]);
                 }
                 
          }
