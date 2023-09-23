@@ -11,17 +11,21 @@ import Footer from './Footer';
 import '../syles/mainPage.css'
 
 function MainPage() {
+    const urlPort = process.env.REACT_APP_LOCAL_HOST_PORT_URL;
+    const url = process.env.REACT_APP_LOCAL_HOST_URL;
     const [zoom] = useState(7);
     const position = [9.748917, -83.753428];
     const [publications, setPublications] = useState([{}]);
     const [empty, setEmpty] = useState(false);
 
+    const urlLeaflet = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+
 
     useEffect(() => {
         window.scrollTo(0, 0);  
-        const route = "http://localhost/router/routes.php?action=getPost";
+        const route = "/router/routes.php?action=getPost";
         const data = {}
-        axios.post(route, data)
+        axios.post(url+route, data)
         .then((response) => {
             if (response.data.length === 0) {
                 setEmpty(false);
@@ -35,6 +39,7 @@ function MainPage() {
             
         })
         .catch((error) => {
+            alert.error("Surgio un error");
             console.error("Error", error);
         });
     }, []);
@@ -53,7 +58,7 @@ function MainPage() {
                             <div className="map-section">
                                 <MapContainer className="main-map" center={position} zoom={zoom}>
                                     <TileLayer
-                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        url = {urlLeaflet}
                                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                     />
                                     <Marker position={position}>
@@ -73,7 +78,7 @@ function MainPage() {
                                 </div>
                                 <div className='about-inside-section-bottom'>
                                     <h2 style={{color:"black"}} for="addButtom">Sube tu sonido Pura Vida aqui</h2>
-                                    <Link to = "http://localhost:3000/postPublication">
+                                    <Link to = {urlPort+"/postPublication"}>
                                         <button id='addButtom' className="addPost-button"></button>
                                     </Link>
                                 </div>

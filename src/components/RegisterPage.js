@@ -13,11 +13,15 @@ import "../syles/general.css";
 
 
 function RegisterPage() {
+
     useEffect(() => {
-        window.scrollTo(0, 0); // Scroll al principio de la página en la carga
+        window.scrollTo(0, 0);
       }, []);
 
-    //STATE VALUES
+    const urlPort = process.env.REACT_APP_LOCAL_HOST_PORT_URL;
+    const url = process.env.REACT_APP_LOCAL_HOST_URL;
+
+    // ---------------STATE SECTION-----------------
     const [namePost, setNamePost] = useState("");
     const [sound, setSound] = useState(null);
     const [picture, setPicture] = useState(null);
@@ -32,7 +36,9 @@ function RegisterPage() {
     const [mostrarExito, setMostrarExito] = useState(false);
     const [mostrarError, setMostrarError] = useState(false);
 
+    const urlLeaflet = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
+    // ---------------FUNCTIONS SECTION-----------------
     const handleAudioSelect = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -55,7 +61,7 @@ function RegisterPage() {
     };
     
     const registerPost = () => {
-        const route = "http://localhost/router/routes.php?action=registerPost";
+        const route = "/router/routes.php?action=registerPost";
         const data = {
             namePost:namePost,
             sound:sound,
@@ -67,7 +73,7 @@ function RegisterPage() {
             long:long
         };
         console.log(data);
-        axios.post(route, data)
+        axios.post(url+route, data)
         .then((response) => {
             console.log(response);
             alert("Registro Exitoso");
@@ -143,7 +149,7 @@ function RegisterPage() {
 
                                 <MapContainer className="mapPost-desing" center={position} zoom={zoom}>
                                     <TileLayer
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    url = {urlLeaflet}
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                     />
                                     <Marker position={position}>

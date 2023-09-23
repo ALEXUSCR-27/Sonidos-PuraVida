@@ -2,6 +2,7 @@
   "name": "sonidos-puravida",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -18,6 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:vm": "REACT_APP_LOCAL_HOST_URL=$REACT_APP_VM_URL_DB REACT_APP_LOCAL_HOST_PORT_URL=$REACT_APP_VM_URL react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
