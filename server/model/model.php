@@ -43,7 +43,7 @@ function getPostFromDB() {
         $posts = array();
         if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]." ". $row["ApellidoAutor"], "descripcion"=>$row["descripcion"]);
+                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]." ". $row["ApellidoAutor"], "descripcion"=>$row["descripcion"], "codigoPublicacion"=>$row["codigoPublicacion"]);
                 }
                 
          }
@@ -89,5 +89,27 @@ function getAdmins($username) {
         echo "Error de consulta: " . $e->getMessage();
     }
 }
+
+function deletePostFromDB($id) {
+    try {
+        $sql_query = "CALL procedureEliminarPublicacion($id);";
+        $stmt = connectDB();
+        $result = $stmt->query($sql_query);
+            
+        if(!$stmt) {
+            die("Error en la consulta: " . mysqli_error($stmt));
+        }
+        $posts = array();
+
+        $stmt->close();
+        header('Content-Type: application/json');
+        echo json_encode($posts);
+
+    }
+    catch (PDOException $e) {
+        echo "Error de consulta: " . $e->getMessage();
+    }
+}
+
 
 ?>

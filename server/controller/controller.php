@@ -31,6 +31,10 @@ function adminLogin($data) {
     echo json_encode(array("result"=>$flag));
 }
 
+function deletePost($data) {
+    $id = (int) $data["id"];
+    deletePostFromDB($id);
+}
 
 
 ?>

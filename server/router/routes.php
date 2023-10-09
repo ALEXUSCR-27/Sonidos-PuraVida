@@ -19,6 +19,9 @@ if (isset($_GET['action'])) {
     if ($action === 'adminModule') {
         adminLogin($data);
     }
+    if ($action === 'deletePost') {
+        deletePost($data);
+    }
     
 }
 
