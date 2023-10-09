@@ -28,7 +28,7 @@
     margin-left: 70px;
 }
 
-.button-home, .button-login {
+.button-home, .button-login, .button-search {
 
     margin-top: 15%;
     width: 145px;
@@ -82,4 +82,60 @@ button:hover {
     width:301px;
     height: 122px;
 
+}
+
+.form-admin {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.input-div {
+    position: relative;
+    left: 50px;
+    margin-left: 50px;
+    font-family: 'Lato', sans-serif;
+
+}
+
+
+.label-admin {
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    
+}
+
+.input-admin {
+    width: 200px;
+    height: 10px;
+    padding: 10px;
+    border: 1px solid rgba(1,87,155,1);
+    border-radius: 3px;
+}
+
+.buttons-div {
+    margin: auto;
+    position: relative;
+    bottom: 44px;
+    margin-right: 90px;
+}
+
+.select-admin {
+    width: 200px;
+    height: 32px;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(1,87,155,1);
+    border-radius: 3px;
+}
+
+
+.button-search {
+    background-color: rgba(1,87,155,1);
+    margin-left: 20px;
+    position:relative;
 }

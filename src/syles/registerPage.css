@@ -1,6 +1,3 @@
-body {
-    color: aliceblue;
-}
 
 .squareForm {
     width: 65%;
@@ -34,6 +31,7 @@ body {
   background-position: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.199),rgba(0, 0, 0, 0.849)), url(/src/assets/images/costarica-news.jpg);
   text-align: center;
+  color: aliceblue;
 
 }
 .squareNews-inside2 {
@@ -47,6 +45,7 @@ body {
   justify-content: center;
   font-family: 'Open Sans', sans-serif;
   font-size: 18px;
+  color: aliceblue;
 
   
 

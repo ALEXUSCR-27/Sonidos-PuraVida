@@ -36,6 +36,7 @@ function AdminLogin() {
             console.log(response.data);
             if (response.data.result == 1 ) {
                 alert("Perfecto");
+                window.location.href = urlPort+"/adminPage";
 
             }
             else {

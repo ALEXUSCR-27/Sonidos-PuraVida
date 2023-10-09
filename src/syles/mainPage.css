@@ -39,19 +39,3 @@
     height: 100%;
 
 }
-
-.main-table {
-    width: 100%;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    margin-bottom: 100px;
-    margin-top: 20px;
-}
-
-.table-header {
-    background-color: rgb(14, 13, 13);
-    color: aliceblue;
-    height: 50px;
-    font-size: "Open Sans", sans-serif;
-    font-size: 17px;
-}

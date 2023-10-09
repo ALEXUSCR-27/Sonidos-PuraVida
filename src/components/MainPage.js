@@ -78,7 +78,7 @@ function MainPage() {
                                 </div>
                                 <div className='about-inside-section-bottom'>
                                     <h2 style={{color:"black"}} for="addButtom">Sube tu sonido Pura Vida aqui</h2>
-                                    <Link to = {urlPort+"/postPublication"}>
+                                    <Link to = {urlPort+"postPublication"}>
                                         <button id='addButtom' className="addPost-button"></button>
                                     </Link>
                                 </div>
@@ -86,7 +86,7 @@ function MainPage() {
                             </div>
                         </div>
                         <div>
-                            <table className="main-table">
+                            <table>
                                 <tr className="table-header">
                                     <th>Titulo</th>
                                     <th>Descripcion</th>
