@@ -139,3 +139,21 @@ button:hover {
     margin-left: 20px;
     position:relative;
 }
+
+.admin-mapSection {
+    width: 50%;
+    margin-left: 20px;
+}
+
+
+.map-details {
+    height: 500px;
+    position: relative;
+
+    border: 0;
+}
+
+.div-details {
+    width: 45%;
+}
+

@@ -105,8 +105,18 @@
     width: 590px;
     height: 400px;
     position: absolute;
-    top: 300px;
+    top: 350px;
     left: 600px;
+}
+
+.select-register {
+    width: 200px;
+    height: 32px;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(99, 99, 99, 0.616);
+    border-radius: 3px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
 }
 
 .h1-preview {

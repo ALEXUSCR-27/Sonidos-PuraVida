@@ -76,7 +76,7 @@ table {
     color: rgb(0, 0, 0);
     text-align: center;
     margin-bottom: 100px;
-
+    margin-top: 30px;
     margin-left: 100px;
     font-family: 'Open Sans', 'sans-serif';
     border-collapse: collapse;
@@ -126,12 +126,22 @@ td {
 
 
 
-.h1-modal {
+.h1-modal, .h1-details, .h2-details {
     font-family: 'Open Sans',  'sans-serif';
-    font-size: 18px;
     margin-left: 20px;
     font-weight:bold;
 } 
+.h1-modal {
+    font-size: 18px;
+}
+
+.h1-details {
+    font-size: 20px;
+} 
+
+.h2-details {
+    font-size: 18px;
+}
 
 .h3-modal {
     font-family: 'Open Sans',  'sans-serif';
@@ -165,4 +175,36 @@ td {
 
 .buttonN {
     background-color: rgb(196, 5, 5);
+}
+
+
+.modal-details {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: 1200px;
+    height: 900px;
+    background-color: #F5F6F8;
+    border-radius: 5px;
+    border: 1px solid #d8d8d8;
+}
+
+
+.close-button {
+    position: relative;
+    width: 100px;
+    height: 40px;
+    font-family: 'Open Sans',  'sans-serif';
+    font-size: 14px;
+    font-weight: bold;
+
+    background-color: rgba(1,87,155,1);
+    color: #d8d8d8;
+    border: 2px solid rgba(133, 133, 133, 0.233);
+    border-radius: 3px;
+    top: 260px;
+    left: 970px;
 }

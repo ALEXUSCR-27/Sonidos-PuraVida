@@ -30,6 +30,7 @@ function RegisterPage() {
     const [postDetails, setPostDetails] = useState("");
     const [lat, setLat] = useState(9.748917);
     const [long, setLong] = useState(-83.753428);
+    const [province, setProvince] = useState("");
     const [zoom] = useState(7);
     const position = [lat, long];
 
@@ -70,7 +71,8 @@ function RegisterPage() {
             lastname:lastname,
             postDetails:postDetails,
             lat:lat,
-            long:long
+            long:long,
+            province:province
         };
         console.log(data);
         console.log(url+route);
@@ -97,6 +99,10 @@ function RegisterPage() {
             setLong(parseFloat(e.target.value));
         }
         
+    }
+
+    const handleProvince = (e) => {
+        setProvince(e.target.value);
     }
 
     
@@ -147,6 +153,19 @@ function RegisterPage() {
 
                                 <label for="namePost" style={{position:'absolute',top:"200px", left:"930px"}}>Longitud</label>      
                                 <input type='text' className="register-user-loc-input"  id="namePost" value={long} onChange={(e) => handleLong(e)} style={{position:'absolute',top:"230px", left:"930px"}}></input>
+                                
+                                <label style={{position:'absolute',top:"270px", left:"600px"}} for="provincia">Provincia</label>
+                                <select className='select-register' value={province} onChange={(e) => handleProvince(e)} style={{position:'absolute',top:"300px", left:"600px"}}   id="provincia">
+                                    <option></option>
+                                    <option value='Cartago'>Cartago</option>
+                                    <option value='San Jose'>San Jose</option>
+                                    <option value='Heredia'>Heredia</option>
+                                    <option value='Alajuela'>Alajuela</option>
+                                    <option value='Limon'>Limon</option>
+                                    <option value='Puntarenas'>Puntarenas</option>
+                                    <option value='Guanacaste'>Guanacaste</option>
+                                </select>
+                         
 
                                 <MapContainer className="mapPost-desing" center={position} zoom={zoom}>
                                     <TileLayer
