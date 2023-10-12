@@ -11,10 +11,10 @@ function registerPostInDB($data) {
     $postDetails = $data["postDetails"];
     $lat = (double)$data["lat"];
     $long = (double)$data["long"];
-    $codigoProvincia = 1;
+    $province = $data["province"];
     $actual_date = date("Y-m-d");
     try {
-        $sql_query = "CALL procedureInsertarPublicacion($codigoProvincia, '$namePost', $lat, $long, '$postDetails', '$actual_date', '$username', '$lastname', '$sound', '$picture');";
+        $sql_query = "CALL procedureInsertarPublicacion('$province', '$namePost', $lat, $long, '$postDetails', '$actual_date', '$username', '$lastname', '$sound', '$picture');";
         echo json_encode(array("consulta"=>$sql_query));
         $stmt = connectDB();
         $stmt->query($sql_query);
@@ -33,7 +33,7 @@ function registerPostInDB($data) {
 function getPostFromDB() {
     try {
 
-        $sql_query = "SELECT * FROM Publicaciones;";
+        $sql_query = "SELECT *, AsText(ubicacion) as coordenadas FROM Publicaciones;";
         $stmt = connectDB();
         $result = $stmt->query($sql_query);
          
@@ -43,7 +43,7 @@ function getPostFromDB() {
         $posts = array();
         if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]." ". $row["ApellidoAutor"], "descripcion"=>$row["descripcion"], "codigoPublicacion"=>$row["codigoPublicacion"]);
+                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]." ". $row["ApellidoAutor"], "descripcion"=>$row["descripcion"], "codigoPublicacion"=>$row["codigoPublicacion"], "foto"=>$row["fotografia"], "coordenadas"=>$row["coordenadas"], "fecha"=>$row["fecha"], "provincia"=>$row["provincia"]);
                 }
                 
          }
@@ -109,6 +109,41 @@ function deletePostFromDB($id) {
     catch (PDOException $e) {
         echo "Error de consulta: " . $e->getMessage();
     }
+}
+
+function filterPostsFromDB($data) {
+    $title = $data["titulo"];
+    $author = $data["autor"];
+    $province = $data["provincia"];
+    $datePost = date('Y-m-d', strtotime($data["fecha"]));
+
+    try {
+        $sql_query = "CALL procedurefiltrarPublicaciones('$title','$author','$province','$datePost');";
+        $stmt = connectDB();
+        //echo json_encode(array("consulta"=>$sql_query));
+        $result = $stmt->query($sql_query);
+         
+        if(!$stmt) {
+            die("Error en la consulta: " . mysqli_error($stmt));
+        }
+ 
+        $posts = array();
+        if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]." ". $row["ApellidoAutor"], "descripcion"=>$row["descripcion"], "codigoPublicacion"=>$row["codigoPublicacion"], "foto"=>$row["fotografia"], "coordenadas"=>$row["coordenadas"], "fecha"=>$row["fecha"], "provincia"=>$row["provincia"]);
+                }
+                
+        }
+
+        $stmt->close();
+        header('Content-Type: application/json');
+        echo json_encode($posts);
+
+    }
+    catch (PDOException $e) {
+        echo "Error de consulta: " . $e->getMessage();
+    }
+
 }
 
 

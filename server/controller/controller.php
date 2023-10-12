@@ -3,9 +3,9 @@ include "../model/model.php";
 
 function registerPost($data) {
     //validar recaptcha
-    registerPostInDB($data);
     
-   
+    registerPostInDB($data);
+     
 }
 
 function getPost() {
@@ -34,6 +34,10 @@ function adminLogin($data) {
 function deletePost($data) {
     $id = (int) $data["id"];
     deletePostFromDB($id);
+}
+
+function filterPosts($data) {
+    filterPostsFromDB($data);
 }
 
 

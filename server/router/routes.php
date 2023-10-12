@@ -22,6 +22,10 @@ if (isset($_GET['action'])) {
     if ($action === 'deletePost') {
         deletePost($data);
     }
+    if ($action === 'filterPosts') {
+        filterPosts($data);
+        
+    }
     
 }
 
