@@ -136,7 +136,7 @@ CREATE TABLE `Administradores` (
 --
 
 INSERT INTO `Administradores` (`nombreAdministrador`, `contraseña`) VALUES
-('NomAdmin', 'NuevaContraseña'),
+('unedSPV', 'SPV_2023'),
 ('NomAdmin2', 'ContraseñaAdmin2');
 
 -- --------------------------------------------------------
