@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.5a7f28fb.css",
-    "main.js": "./static/js/main.058ac025.js",
+    "main.css": "./static/css/main.d0dc488e.css",
+    "main.js": "./static/js/main.70fec932.js",
     "static/js/787.104a5c84.chunk.js": "./static/js/787.104a5c84.chunk.js",
     "static/media/costarica-news.jpg": "./static/media/costarica-news.25a2a1d69c0699a80b9a.jpg",
     "static/media/BannerSonidos.png": "./static/media/BannerSonidos.8948b2aa1c855543b58a.png",
     "static/media/uned_logo.png": "./static/media/uned_logo.a9e445ee37bc1f2707f7.png",
     "static/media/upload_rmbg.png": "./static/media/upload_rmbg.8f6becdb75a859c127aa.png",
     "index.html": "./index.html",
-    "main.5a7f28fb.css.map": "./static/css/main.5a7f28fb.css.map",
-    "main.058ac025.js.map": "./static/js/main.058ac025.js.map",
+    "main.d0dc488e.css.map": "./static/css/main.d0dc488e.css.map",
+    "main.70fec932.js.map": "./static/js/main.70fec932.js.map",
     "787.104a5c84.chunk.js.map": "./static/js/787.104a5c84.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5a7f28fb.css",
-    "static/js/main.058ac025.js"
+    "static/css/main.d0dc488e.css",
+    "static/js/main.70fec932.js"
   ]
 }
