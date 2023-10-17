@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Header from './Header';
 import Footer from './Footer';
+import AdvertiseWindow from './AdvertiseWindow';
 
 import '../syles/admin.css'
 function AdminLogin() {
@@ -13,6 +14,8 @@ function AdminLogin() {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [loginFlag, setLogin] = useState(false);
+    const [message, setMessage] = useState("");
+    const [titleModal, setTitleModal] = useState("");
     
 
     const handleUsername = (e) => {
@@ -21,6 +24,13 @@ function AdminLogin() {
     const handlePassword = (e) => {
         setPassword(e.target.value);
     }
+
+    const [openAdvertiseW, setOpenAdvertiseW] = useState(false);
+
+    const closeAdvertiseW = () => {
+        setOpenAdvertiseW(false);
+    };
+
 
     const login = () => {
         const route = "/server/router/routes.php?action=adminModule";
@@ -35,12 +45,12 @@ function AdminLogin() {
         .then((response) => {
             console.log(response.data);
             if (response.data.result == 1 ) {
-                alert("Perfecto");
-                window.location.href = urlPort+"/adminPage";
+                window.location.href = urlPort+"adminPage";
 
             }
             else {
-                alert("Quien es ud?");
+                var errorMessage = document.querySelector(".error-message");
+                errorMessage.style.display = "block";
             }
         })
         .catch((error) => {
@@ -52,18 +62,22 @@ function AdminLogin() {
 
     return(
         <div>
-            
+            <AdvertiseWindow isOpen={openAdvertiseW} onRequestClose={closeAdvertiseW} msg={message} title={titleModal}/>
             <main>
                 
                 <div className='admin-square'>
                     <div className='uned-logo'></div>
                     
-                    <div style={{"margin-top":"15%"}}>
+                    <div style={{marginTop:"15%"}}>
+                        
+
                         <input className='input-login' placeholder='username' value={username} onChange={(e) => handleUsername(e)}></input>
-                        <input className='input-login' placeholder='password' value={password} onChange={(e) => handlePassword(e)}></input>
+                        <input className='input-login' type='password' placeholder='password' value={password} onChange={(e) => handlePassword(e)}></input>
+                        <div class="error-message">
+                            <h3 className='h3-message'>Error! Usuario o Contraseña incorrectos. Por favor, inténtelo de nuevo.</h3>
+                        </div>
                         <button className='button-login' onClick={login}>LOGIN</button>
-                    
-                            
+                        
                     </div>
                 </div>
             </main>

@@ -7,6 +7,7 @@ import '../syles/admin.css'
 import ConfirmWindow from './ConfirmWindow';
 import AdvertiseWindow from './AdvertiseWindow';
 import PostDetailsWindow from './PostDetailsWindow';
+import { Link } from 'react-router-dom';
 
 
 function AdminPage() {
@@ -24,6 +25,7 @@ function AdminPage() {
     const [author, setAuthor] = useState("");
     const [province, setProvince] = useState("");
     const [date, setDate] = useState("1990-01-01");
+    const [report, setReport] = useState([]);
 
     const [openConfirmW, setOpenConfirmW] = useState(false);
 
@@ -40,6 +42,38 @@ function AdminPage() {
     const closeDetailsW = () => {
         setOpenDetailsW(false);
     };
+
+    const addPostReport = (postInfo) => {
+        console.log(report.length);
+        if (report.length === 0) setReport([postInfo]);
+        else {
+            report.push(postInfo);
+        }
+        console.log(report);
+    }
+
+    const createReport = () => {
+        const csvHeader = ['ID','Título', 'Autor', 'Fecha','Coordenadas', 'Provincia', 'Descripcion'];
+        const csv = [
+            csvHeader.join(','), 
+            ...report.map(item => [item.id, item.titulo, item.autor, item.fecha, item.coordenadas, item.provincia, item.descripcion].join(','))
+          ].join('\n');
+        console.log(csv);
+
+        // Crear un objeto Blob
+        const blob = new Blob([csv], { type: 'text/csv' });
+
+        // Crear una URL para el Blob
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        // Crear un elemento de enlace (link) para descargar el archivo
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'datos.csv'; 
+
+        link.click();
+
+    }
 
     
 
@@ -71,6 +105,7 @@ function AdminPage() {
         const data = {}
         axios.post(url+route, data)
         .then((response) => {
+            console.log(response.data.length);
             if (response.data.length === 0) {
                 setEmpty(false);
             }
@@ -126,6 +161,13 @@ function AdminPage() {
         //console.log(publications[0].foto)
         setOpenDetailsW(true);
     }
+
+    const resetFilters = () => {
+        setTitle("");
+        setAuthor("");
+        setProvince("");
+        setDate("1990-01-01");
+    }
     
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -154,8 +196,13 @@ function AdminPage() {
         const route = "/server/router/routes.php?action=filterPosts";
         axios.post(url+route, data)
         .then((response) => {
-            console.log(response.data);
-            setPublications(response.data);
+            if (response.data.length === 0) {
+                setEmpty(false);
+            }
+            else {
+                setEmpty(true);
+                setPublications(response.data);
+            }
         })
         .catch((error) => {
             alert("Surgio un error");
@@ -167,6 +214,11 @@ function AdminPage() {
 
     return(
         <div>
+            <header className='admin-header'>
+                <Link to={urlPort}>
+                    <button className='sign-out'>CERRAR SESION</button>
+                </Link>
+            </header>
             <ConfirmWindow isOpen={openConfirmW} onRequestClose={closeConfirmW} msg={message} title={titleModal} deletePost={deletePost}/>
             <AdvertiseWindow isOpen={openAdvertiseW} onRequestClose={closeAdvertiseW} msg={message} title={titleModal}/>
             <PostDetailsWindow isOpen={openDetailsW} onRequestClose={closeDetailsW} title={titleModal} posts={details}/>
@@ -174,18 +226,18 @@ function AdminPage() {
 
             <div className='form-admin'>
                 <div className='input-div'>
-                    <label className='label-admin'  for="titulo">Titulo</label>
+                    <label className='label-admin'  htmlFor="titulo">Titulo</label>
                     <input className='input-admin' id="titulo" value={title} onChange={(e) => handleTitle(e)}></input>
                 </div>
                 
                 <div className='input-div'>
-                    <label className='label-admin' for="autor">Autor</label>
+                    <label className='label-admin' htmlFor="autor">Autor</label>
                     <input className='input-admin' id="autor" value={author} onChange={(e) => handleAuthor(e)}></input>
                 
                 </div>
                 
                 <div className='input-div'>
-                    <label className='label-admin' for="provincia">Provincia</label>
+                    <label className='label-admin' htmlFor="provincia">Provincia</label>
                     <select className='select-admin' id="provincia" value={province} onChange={(e) => handleProvince(e)}>
                         <option value=''></option>
                         <option value='Cartago'>Cartago</option>
@@ -199,67 +251,83 @@ function AdminPage() {
                 </div>
 
                 <div className='input-div'>
-                    <label className='label-admin' for="datePost">Fecha</label>
+                    <label className='label-admin' htmlFor="datePost">Fecha</label>
                     <input className='input-admin' type="date" id="datePost" value={date} onChange={(e) => handleDate(e)}></input> 
                 </div>
                 
                 <div className='buttons-div'>
-                    <button className='button-search'>REPORTE</button>
-                    <button className='button-search'>LIMPIAR</button>
+                    <button className='button-search' onClick={createReport}>REPORTE</button>
+                    <button className='button-search' onClick={resetFilters}>LIMPIAR</button>
                     <button className='button-search' onClick={filterPosts}>BUSCAR</button>
                 </div>
             </div>
             <div>
                 <table>
-                    <tr>
-                        <th>
-                            <input type="checkbox"></input>
-                        </th>
-                        <th>Titulo</th>
-                        <th>Descripcion</th>
-                        <th>Autor</th>
-                        <th style={{width:"400px"}}>Opciones</th>
-                    </tr>
-                    {empty && (
-                        publications.map((val, key) => {
-                            return (
-                                <tr key={key}>
-                                    <td>
-                                        <input type="checkbox"></input>
-                                    </td>
-                                    <td>{val.titulo}</td>
-                                    <td>{val.descripcion}</td>
-                                    <td>{val.autor}</td>
-                                    <td>
-                                        <button onClick={() => postDetails([{
-                                            id:val.codigoPublicacion,
-                                            titulo:val.titulo,
-                                            descripcion:val.descripcion,
-                                            autor:val.autor,
-                                            foto:val.foto,
-                                            coordenadas:val.coordenadas,
-                                            fecha: val.fecha,
-                                            provincia: val.provincia
-                                            }])}>VER DETALLES</button>
-                                        <button>MODIFICAR</button>
-                                        <button onClick={() => deletePostAdvertise(val.codigoPublicacion)}>ELIMINAR</button>
-                                    </td>
-                                                    
-                                </tr>
-                            )
-                        })
-                    )}
-
-                    {!empty && (
+                    <thead>
                         <tr>
-                            <td></td>
-                            <td>Sin resultados</td>
-                            <td>Sin resultados</td>
-                            <td>Sin resultados</td>
-                            <td>Sin opciones</td>
+                            <th>
+                                <input type="checkbox"></input>
+                            </th>
+                            <th>Titulo</th>
+                            <th>Descripcion</th>
+                            <th>Autor</th>
+                            <th style={{width:"400px"}}>Opciones</th>
                         </tr>
-                    )}
-                                    
+                    </thead>
+                    <tbody>
+                        {empty && (
+                            publications.map((val, key) => {
+                                return (
+                                    <tr key={key}>
+                                        <td>
+                                            <input type="checkbox" onClick={(e) => {
+                                            if (e.target.checked) {
+                                                addPostReport({
+                                                    id:val.codigoPublicacion,
+                                                    titulo:val.titulo,
+                                                    descripcion:val.descripcion,
+                                                    autor:val.autor,
+                                                    foto:val.foto,
+                                                    coordenadas:val.coordenadas,
+                                                    fecha: val.fecha,
+                                                    provincia: val.provincia
+                                                    })
+                                                }
+                                            }}></input>
+                                        </td>
+                                        <td>{val.titulo}</td>
+                                        <td>{val.descripcion}</td>
+                                        <td>{val.autor}</td>
+                                        <td>
+                                            <button onClick={() => postDetails([{
+                                                id:val.codigoPublicacion,
+                                                titulo:val.titulo,
+                                                descripcion:val.descripcion,
+                                                autor:val.autor,
+                                                foto:val.foto,
+                                                coordenadas:val.coordenadas,
+                                                fecha: val.fecha,
+                                                provincia: val.provincia
+                                                }])}>VER DETALLES</button>
+                                            <button>MODIFICAR</button>
+                                            <button onClick={() => deletePostAdvertise(val.codigoPublicacion)}>ELIMINAR</button>
+                                        </td>
+                                                        
+                                    </tr>
+                                )
+                            })
+                        )}
+
+                        {!empty && (
+                            <tr>
+                                <td></td>
+                                <td>Sin resultados</td>
+                                <td>Sin resultados</td>
+                                <td>Sin resultados</td>
+                                <td>Sin opciones</td>
+                            </tr>
+                        )}
+                    </tbody>            
                 </table>
             </div>
         </div>

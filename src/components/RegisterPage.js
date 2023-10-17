@@ -116,10 +116,10 @@ function RegisterPage() {
                         <main style={{display:"flex"}}>
                             <div className="squareForm">
                                 <h3 className="h3-register" style={{position:'absolute', top:"15px", left:"60px"}}>Informacion de la publicacion</h3>
-                                <label for="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Titulo de la publicacion</label>      
+                                <label htmlFor="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Titulo de la publicacion</label>      
                                 <input className="register-title-input" id="namePost" value={namePost} onChange={(e) => {setNamePost(e.target.value)}} style={{position:'absolute',top:"110px", left:"60px"}} placeholder='Ej: Sonidos de Cartago' required ></input>
 
-                                <label for="namePost" style={{position:'absolute',top:"160px", left:"60px"}}>Archivo de sonido (50MB MAX) (MP3, WAV, OGG)</label>      
+                                <label htmlFor="namePost" style={{position:'absolute',top:"160px", left:"60px"}}>Archivo de sonido (50MB MAX) (MP3, WAV, OGG)</label>      
                                 <input id="namePost" type="file" accept="audio/*" onChange={handleAudioSelect} style={{position:'absolute',top:"190px", left:"60px"}}></input>
                                 {sound && (
                                     <audio controls style={{position:'absolute',top:"220px", left:"60px"}} className="player-desing">
@@ -128,7 +128,7 @@ function RegisterPage() {
                                     </audio>
                                 )}
 
-                                <label for="namePost" style={{position:'absolute',top:"280px", left:"60px"}}>Foto (50MB MAX) (PNG, GIF, JPG, JPEG)</label>      
+                                <label htmlFor="namePost" style={{position:'absolute',top:"280px", left:"60px"}}>Foto (50MB MAX) (PNG, GIF, JPG, JPEG)</label>      
                                 <input id="namePost" type="file" accept="image/*" onChange={handleImageSelect} style={{position:'absolute',top:"310px", left:"60px"}}></input>
                                 {!picture && (
                                     <div className="squarePreview"></div>
@@ -136,25 +136,25 @@ function RegisterPage() {
                                 {picture && (   
                                     <img className="preview" src={picture} alt="Vista previa de la imagen" />
                                 )}
-                                <label for="namePost" style={{position:'absolute',top:"610px", left:"60px"}}>Detalles o comentarios</label>      
+                                <label htmlFor="namePost" style={{position:'absolute',top:"610px", left:"60px"}}>Detalles o comentarios</label>      
                                 <textarea className='register-details' id="namePost" value={postDetails} onChange={(e) => {setPostDetails(e.target.value)}} style={{position:'absolute',top:"640px", left:"60px"}} rows="11" cols="41" placeholder='Cuentenos la historia de su sonido pura vida.'></textarea>
                                 {/** FORM DIVISION, POST INFO UP - USER INFO DOWN   */}
                                 
                                 <h3 className="h3-register" style={{position:'absolute',top:"15px", left:"600px"}}>Informacion del Autor</h3>
-                                <label for="namePost" style={{position:'absolute',top:"80px", left:"600px"}}>Nombre del autor</label>      
+                                <label htmlFor="namePost" style={{position:'absolute',top:"80px", left:"600px"}}>Nombre del autor</label>      
                                 <input className="register-user-loc-input" id="namePost" value={username} onChange={(e) => {setUsername(e.target.value)}} style={{position:'absolute',top:"110px", left:"600px"}} placeholder='Ej: Carlos'></input>
 
-                                <label for="namePost" style={{position:'absolute',top:"80px", left:"930px"}}>Primer Apellido</label>      
+                                <label htmlFor="namePost" style={{position:'absolute',top:"80px", left:"930px"}}>Primer Apellido</label>      
                                 <input className="register-user-loc-input" id="namePost" value={lastname} onChange={(e) => {setLastName(e.target.value)}} style={{position:'absolute',top:"110px", left:"930px"}} placeholder='Ej: Ramirez'></input>
 
                                 <h3 className='h3-register' style={{position:'absolute',top:"135px", left:"600px"}}>Ubicacion</h3>
-                                <label for="namePost" style={{position:'absolute',top:"200px", left:"600px"}}>Latitud</label>      
+                                <label htmlFor="namePost" style={{position:'absolute',top:"200px", left:"600px"}}>Latitud</label>      
                                 <input className="register-user-loc-input" id="namePost" value={lat} onChange={(e) => handleLatitud(e)} style={{position:'absolute',top:"230px", left:"600px"}}></input>
 
-                                <label for="namePost" style={{position:'absolute',top:"200px", left:"930px"}}>Longitud</label>      
+                                <label htmlFor="namePost" style={{position:'absolute',top:"200px", left:"930px"}}>Longitud</label>      
                                 <input type='text' className="register-user-loc-input"  id="namePost" value={long} onChange={(e) => handleLong(e)} style={{position:'absolute',top:"230px", left:"930px"}}></input>
                                 
-                                <label style={{position:'absolute',top:"270px", left:"600px"}} for="provincia">Provincia</label>
+                                <label style={{position:'absolute',top:"270px", left:"600px"}} htmlFor="provincia">Provincia</label>
                                 <select className='select-register' value={province} onChange={(e) => handleProvince(e)} style={{position:'absolute',top:"300px", left:"600px"}}   id="provincia">
                                     <option></option>
                                     <option value='Cartago'>Cartago</option>

@@ -47,11 +47,7 @@ function PostDetailsWindow({ isOpen, onRequestClose, title, posts, picture }) {
                   <h2 className='h2-details'>Fecha de registro (YYYY-MM-DD): {posts[0].fecha}</h2>
                   
                 </div>
-                <div>
-                  <h1 className='h1-details'>Audio</h1>
-                  <h2 className='h2-details'>Aqui va el audio</h2>
-                  
-                </div>
+                
                   
               </div>
               <div className="admin-mapSection">

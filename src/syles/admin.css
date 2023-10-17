@@ -21,16 +21,19 @@
 .button-login {
     background-color: rgba(1,87,155,1);
     margin-left: 152.5px;
+    margin-top: 50px;
+
 }
 
 .button-home {
+    margin-top: 15%;
     background-color: #233255f8;
     margin-left: 70px;
 }
 
 .button-home, .button-login, .button-search {
 
-    margin-top: 15%;
+
     width: 145px;
     height: 35px;
     text-align: center;
@@ -135,6 +138,7 @@ button:hover {
 
 
 .button-search {
+    margin-top: 15%;
     background-color: rgba(1,87,155,1);
     margin-left: 20px;
     position:relative;
@@ -157,3 +161,40 @@ button:hover {
     width: 45%;
 }
 
+.error-message {
+    color: red;
+    display: none;
+
+    
+}
+
+.h3-message {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    margin-left: 70px;
+    width: 280px;
+    height: 35px;
+    text-align: left;
+ 
+}
+.admin-header {
+    background-color: #1B5EB5;
+    height: 70px;
+}
+
+.sign-out {
+    width: 145px;
+    height: 35px;
+    text-align: center;
+    border-radius: 2px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-color: #8F2D56;
+    border: 0;
+    margin-top: 20px;
+    margin-left: 1687px;
+}
+  

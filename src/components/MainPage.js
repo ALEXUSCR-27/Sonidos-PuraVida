@@ -54,7 +54,7 @@ function MainPage() {
             
                 <div>
                     <main>
-                        <div style={{display:"flex"}}>
+                        <div className='main-div' style={{display:"flex"}}>
                             <div className="map-section">
                                 <MapContainer className="main-map" center={position} zoom={zoom}>
                                     <TileLayer
@@ -76,45 +76,63 @@ function MainPage() {
                                     <p>Un mapa sonoro es una técnica acústica para conocer los sonidos de un lugar, comunidad o ciudad; ubica los sonidos geográficamente. Para construir este tipo de material se requiere de diferentes puntos de vista, en particular de las personas que conocen el lugar.</p>
                                     <p>Por ello les invitamos a que nos envíen los sonidos más representativos de su comunidad.</p>
                                 </div>
-                                <div className='about-inside-section-bottom'>
-                                    <h2 style={{color:"black"}} for="addButtom">Sube tu sonido Pura Vida aqui</h2>
-                                    <Link to = {urlPort+"postPublication"}>
-                                        <button id='addButtom' className="addPost-button"></button>
-                                    </Link>
+                                <div className='about-section-inside-bottom'>
+                                    <div className='postButton-title'>
+                                        <h2 className='h2-about'>Sube tu sonido Pura Vida aqui!</h2>
+                                    </div>
+                                    
+                                    <div className='postButton-section'>
+                                        <Link to = {urlPort+"postPublication"}>
+                                            <button id='addButtom' className="addPost-button"></button>
+                                        </Link>
+                                    </div>
+                                    
                                 </div>
                                 
                             </div>
                         </div>
                         <div>
-                            <table>
-                                <tr className="table-header">
-                                    <th>Titulo</th>
-                                    <th>Descripcion</th>
-                                    <th>Autor</th>
-                                </tr>
-                                {empty && (
-                                    publications.map((val, key) => {
-                                        return (
-                                            <tr key={key}>
-                                                <td>{val.titulo}</td>
-                                                <td>{val.descripcion}</td>
-                                                <td>{val.autor}</td>
-                                               
-                                            </tr>
+                            <div className='main-title'>
+                                <h1 className='h1-main'>Publicaciones Sonidos Del Pura Vida</h1>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr className="table-header">
+                                            <th>Titulo</th>
+                                            <th>Descripcion</th>
+                                            <th>Autor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {empty && (
+                                            publications.map((val, key) => {
+                                                return (
+                                                    <tr key={key}>
+                                                        <td>{val.titulo}</td>
+                                                        <td>{val.descripcion}</td>
+                                                        <td>{val.autor}</td>
+                                                    
+                                                    </tr>
+                                                )
+                                            })
                                         )
-                                    })
-                                )
-                                }
+                                        }
 
-                                {!empty && (
-                                    <tr>
-                                        <td>Sin resultados</td>
-                                        <td>Sin resultados</td>
-                                        <td>Sin resultados</td>
-                                    </tr>
-                                )}
-                                
-                            </table>
+                                        {!empty && (
+                                            <tr>
+                                                <td>Sin resultados</td>
+                                                <td>Sin resultados</td>
+                                                <td>Sin resultados</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                    
+                                    
+                                    
+                                </table>
+                            </div>
+                            
                         </div>
                         
 
