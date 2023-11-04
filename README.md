@@ -1,2 +1,2 @@
 # Sonidos-PuraVida
-Este repositorio contiene el nuevo sistema Sonidos Pura Vida, desarrollado con ReactJS para el Frontend, PHP y MariaDB para el Backend.
+Este repositorio contiene el nuevo sistema Sonidos Pura Vida, desarrollado para el departamento de investigacion de la Universidad Estatal a Distancia (UNED).
