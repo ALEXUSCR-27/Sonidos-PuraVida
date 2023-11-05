@@ -103,11 +103,11 @@ td {
     right: auto;
     bottom: auto;
     transform: translate(-50%, -50%);
-    width: 350px;
-    height: 200px;
+    width: 650px;
+    height: 220px;
     background-color: #F5F6F8;
-    border-radius: 5px;
-    border: 1px solid #d8d8d8;
+    border: 0;
+
 
     
 }
@@ -122,6 +122,25 @@ td {
     height: 100%;
 }
 
+.closeModal-button {
+    position: relative;
+    margin-left: 70%;
+    width: 60px;
+    height: 30px;
+    font-family: 'Open Sans', 'sans-serif';
+    font-weight: 600;
+    font-size: 15px;
+    background-color: #364c7e;
+    border: 0;
+    cursor: pointer;
+    color: #ffffff;
+
+}
+
+.closeModal-button:hover {
+    background-color: #FFC211;
+}
+
 
 
 .h1-modal, .h1-details, .h2-details {
@@ -130,7 +149,8 @@ td {
     font-weight:bold;
 } 
 .h1-modal {
-    font-size: 18px;
+    font-size: 25px;
+    color: #364c7e;
 }
 
 .h1-details {
@@ -144,11 +164,19 @@ td {
 .h3-modal {
     font-family: 'Open Sans',  'sans-serif';
     font-size: 16px;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 20px;
+    font-weight: 300;
 }
 
 .buttonsYN-modal {
+    position: relative;
+    left: 400px;
+    top: 20px;
+
+}
+
+.buttonClose-modal {
     position: relative;
     left: 85px;
     top: 20px;
@@ -156,16 +184,18 @@ td {
 }
 
 .buttonY, .buttonN {
-    width: 50px;
+    width: 60px;
     height: 30px;
     font-family: 'Open Sans',  'sans-serif';
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
     margin-left: 30px;
     color: #ffffff;
-    border: 2px solid rgba(133, 133, 133, 0.233);
+    border: 0;
     border-radius: 3px;
+    cursor: pointer;
 }
+
 
 .buttonY {
     background-color: rgba(1,87,155,1);

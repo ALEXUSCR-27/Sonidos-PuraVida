@@ -71,14 +71,17 @@
 }
 
 
-.explore-button, .register-button {
-  width: 100px;
-  height: 50px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  color: aliceblue;
-  cursor: pointer;
+.register-button {
+    width: 100px;
+    height: 40px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: aliceblue;
+    cursor: pointer;
+}
+.register-button:hover {
+    background-color: #FFC211;
 }
 
 .register-button {
@@ -104,7 +107,8 @@
 .mapPost-desing{
     width: 590px;
     height: 400px;
-    position: absolute;
+    position: relative;
+    z-index: 0;
     top: 350px;
     left: 600px;
 }
@@ -129,8 +133,8 @@
 
 .h3-register {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 19px;
 }
 
 .register-title-input {
@@ -145,7 +149,7 @@
 }
 
 .register-title-input, .register-user-loc-input {
-  font-size: 17px;
+  font-size: 15px;
   font-family: 'Open Sans', sans-serif;
 }
 
