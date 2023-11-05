@@ -1,5 +1,5 @@
 <?php
-include "../db-config/db-connection.php";
+include "./db-config/db-connection.php";
 
 function registerPostInDB($data) {
 
@@ -146,5 +146,74 @@ function filterPostsFromDB($data) {
 
 }
 
+function generateName($file_name, $upload_dir) {
+    $random_name = date("Y-m-d") . "_" . rand(1000,1000000) . "-". $file_name;
+    $upload_name = $upload_dir.strtolower($random_name);
+    $upload_name = preg_replace('/\s+/', '-', $upload_name);
+    return $upload_name;
+}
+
+
+function uploadFilesInDB($data) {
+    $upload_dir_IMG = SITE_ROOT.'/uploads/postImages/';
+    $upload_dir_AUD = SITE_ROOT.'/uploads/postSounds/';
+    
+    if (!is_dir($upload_dir_IMG)) {
+        echo "no existe";
+        //mkdir($uploadDir, 0755, true);
+    }
+
+    $file_name_Img = "";
+    $file_tmp_name_Img = "";
+    $file_name_aud = "";
+    $file_tmp_name_aud = "";
+    $response = [];
+
+    
+    if ($data["image"] != null) {
+        $file_name_Img = $data["image"]["name"];
+        $file_tmp_name_Img = $data["image"]["tmp_name"];
+        $upload_name = generateName($file_name_Img, $upload_dir_IMG);
+
+        if(move_uploaded_file($file_tmp_name_Img, $upload_name)) {
+            $path = './'.$upload_name;
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data_Img = file_get_contents($path);
+            $delimitador = '/\/server\//';
+            $basePath = preg_split($delimitador, $path)[1];
+           
+            $response['successIMG'] = true;
+            $response['imageUrl'] = $basePath;
+    
+        } else {
+            $response['successIMG'] = false;
+            $response['errorIMG'] = $path["file"]["error"];
+        }
+    }
+
+    if ($data["audio"] != null) {
+        $file_name_aud = $data["audio"]["name"];
+        $file_tmp_name_aud = $data["audio"]["tmp_name"];
+        $upload_name = generateName($file_name_aud, $upload_dir_AUD);
+
+        if(move_uploaded_file($file_tmp_name_aud, $upload_name)) {
+            $path = './'.$upload_name;
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data_Aud = file_get_contents($path);
+            $delimitador = '/\/server\//';
+            $basePath = preg_split($delimitador, $path)[1];
+           
+            $response['successAUD'] = true;
+            $response['audioUrl'] = $basePath;
+    
+        } else {
+            $response['successAUD'] = false;
+            $response['errorAUD'] = $path["file"]["error"];
+        }
+    }
+
+    echo json_encode($response);
+
+}
 
 ?>

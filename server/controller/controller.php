@@ -1,10 +1,10 @@
 <?php
-include "../model/model.php";
+include "./model/model.php";
 
 function registerPost($data) {
     //validar recaptcha
-    
-    registerPostInDB($data);
+    echo json_encode($data);
+    //registerPostInDB($data);
      
 }
 
@@ -38,6 +38,10 @@ function deletePost($data) {
 
 function filterPosts($data) {
     filterPostsFromDB($data);
+}
+
+function uploadFiles($data) {
+    uploadFilesInDB($data);
 }
 
 
