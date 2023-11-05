@@ -6,6 +6,7 @@ import axios from 'axios';
 //COMPONENTS
 import Header from './Header';
 import Footer from './Footer';
+import AdvertiseWindow from './AdvertiseWindow';
 
 //STYLES
 import "../syles/registerPage.css";
@@ -33,59 +34,160 @@ function RegisterPage() {
     const [province, setProvince] = useState("");
     const [zoom] = useState(7);
     const position = [lat, long];
+    const [formData, setFormData] = useState(null);
+    const [urlImage, setUrlImage] = useState("");
+    const [urlSound, setUrlSound] = useState("");
 
-    const [mostrarExito, setMostrarExito] = useState(false);
-    const [mostrarError, setMostrarError] = useState(false);
+    const [titleModal, setTitleModal] = useState("");
+    const [message, setMessage] = useState("");
+
+    const [openAdvertiseW, setOpenAdvertiseW] = useState(false);
+    const closeAdvertiseW = () => {
+        setOpenAdvertiseW(false);
+    };
+
 
     const urlLeaflet = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
     // ---------------FUNCTIONS SECTION-----------------
     const handleAudioSelect = (event) => {
         const file = event.target.files[0];
-        if (file) {
-          // Validar que el archivo sea de tipo audio si lo deseas
-          if (file.type.startsWith("audio/")) {
-            setSound(URL.createObjectURL(file));
-            console.log("sound");
-          } else {
-            alert("Selecciona un archivo de audio válido.");
-          }
+        const allowedExtensions = [".mp3", ".wav", ".ogg", ".mp4"];
+        const fileExtension = file.name.split(".").pop();
+        
+        if (allowedExtensions.includes(`.${fileExtension}`)) {
+            if (file) {
+            // Validar que el archivo sea de tipo audio si lo deseas
+                if (file.type.startsWith("audio/") || file.type.startsWith("video/")) {
+                    
+                    setSound(URL.createObjectURL(file));
+                    let formDataAudio = new FormData();
+                    if (formData != null) {
+                        formDataAudio = formData;
+                    }
+                    
+                    formDataAudio.append('audio', file);
+                    setFormData(formDataAudio);
+                    console.log("sound");
+                } else {
+                    setTitleModal("Aviso!");
+                    setMessage("Por favor selecciona un archivo de audio valido!");
+                    setOpenAdvertiseW(true);
+                    setSound(null);
+                }
+            }
+        }
+        else {
+            setTitleModal("Aviso!");
+            setMessage("Por favor seleccione un formato de audio valido! (mp3, mp4, ogg, wav).");
+            setOpenAdvertiseW(true);
+            setSound(null);
         }
       };
 
     const handleImageSelect = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        setPicture(imageUrl);
-    }
+        const file = event.target.files[0];
+        const allowedExtensions = [".png", ".jpg", ".jpeg", ".gif"];
+        const fileExtension = file.name.split(".").pop();
+        if (allowedExtensions.includes(`.${fileExtension}`)) {
+            if (file) {
+                let formDataImg = new FormData();
+                if (formData != null) {
+                    formDataImg = formData;
+                }
+                formDataImg.append('image', file);
+                setFormData(formDataImg);
+                const imageUrl = URL.createObjectURL(file);
+                setPicture(imageUrl);
+            }
+        }
+        else {
+            setTitleModal("Aviso!");
+            setMessage("Ha seleccionado un formato de imagen invalido, sino selecciona alguno de estos (png, jpg, jpeg, gif), su publicacion se registrara sin imagen!");
+            setOpenAdvertiseW(true);
+            setPicture(null);
+        }
     };
     
-    const registerPost = () => {
-        const route = "/server/router/routes.php?action=registerPost";
-        const data = {
-            namePost:namePost,
-            sound:sound,
-            picture:picture,
-            username:username,
-            lastname:lastname,
-            postDetails:postDetails,
-            lat:lat,
-            long:long,
-            province:province
-        };
-        console.log(data);
-        console.log(url+route);
-        axios.post(url+route, data)
-        .then((response) => {
-            console.log(response);
-            alert("Registro Exitoso");
-        })
-        .catch((error) => {
-            console.error("Error", error);
-        });
+    const registerPost = async () => {
+        if (validatePublication()) {
+            await uploadFiles();
+            const route = "/server/router.php?action=registerPost";
+            const data = {
+                namePost:namePost,
+                sound:urlSound,
+                picture:urlImage,
+                username:username,
+                lastname:lastname,
+                postDetails:postDetails,
+                lat:lat,
+                long:long,
+                province:province
+            };
+            console.log(data);
+            console.log(url+route);
+            axios.post(url+route, data)
+            .then((response) => {
+                setTitleModal("Aviso!");
+                setMessage("El registro de su publicacion ha sido exitoso!");
+                setOpenAdvertiseW(true);
+                resetFilters();
+                console.log(response);
+            })
+            .catch((error) => {
+                setTitleModal("Aviso!");
+                setMessage("Se ha producido un error al intentar registrar su publicacion. Intente de nuevo!");
+                setOpenAdvertiseW(true);
+                console.error("Error", error);
+            });
+        }
+        
 
     };
+
+    const uploadFiles = () => {
+        return new Promise((resolve, reject) => {
+            const data = {
+                files:formData
+            }
+            console.log(data);
+            const route = "/server/router.php?action=uploadFiles";
+            console.log(url+route);
+            axios.post(url+route,formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              })
+                .then((response) => {
+                  if (!response.data.successIMG) {
+                    setTitleModal("Aviso!");
+                    setMessage("Ha surgido un problema al intentar subir la imagen de la publicacion!");
+                    setOpenAdvertiseW(true);
+                    setPicture(null);
+                  }
+                  else {
+                    setUrlImage(url+'/server/'+response.data.imageUrl);
+                  }
+                  if (!response.data.successAUD) {
+                    setTitleModal("Aviso!");
+                    setMessage("Ha surgido un problema al intentar subir su sonido Pura Vida!");
+                    setOpenAdvertiseW(true);
+                    setSound(null);
+                  }
+                  else {
+                    setUrlSound(url+'/server/'+response.data.audioUrl);
+                    resolve(true);
+                  }
+                  
+                  console.log(response);
+    
+                })
+                .catch((error) => {
+                  console.error('Error al cargar la imagen:', error);
+            });
+        })
+        
+    }
 
     const handleLatitud = (e) => {
         if (e.target.value != "" & e.target.value != ".") {
@@ -105,6 +207,35 @@ function RegisterPage() {
         setProvince(e.target.value);
     }
 
+    const validatePublication = () => {
+        if (namePost == "" || username == "" || lastname == "") {
+            setTitleModal("Aviso!");
+            setMessage("Por favor ingrese un nombre y apellido. Estos campos son obligatorios para continuar!");
+            setOpenAdvertiseW(true);
+            return false;
+        }
+
+        if (sound == null) {
+            setTitleModal("Aviso!");
+            setMessage("Por favor ingrese un archivo de sonido. Estos campos son obligatorios para continuar. Ademas tenga en cuenta los formatos validos (.mp3, .wav, .ogg, .mp4)");
+            setOpenAdvertiseW(true);
+            return false;
+        }
+
+        return true;
+    }
+
+    const resetFilters = () => {
+        setUsername("");
+        setLastName("");
+        setNamePost("");
+        setPostDetails("");
+        setPicture(null);
+        setSound(null);
+    }
+
+
+
     
     return(
         <div>
@@ -112,15 +243,17 @@ function RegisterPage() {
                 <header>
                     <Header/>
                 </header>
+                
                 <div>
+                    <AdvertiseWindow isOpen={openAdvertiseW} onRequestClose={closeAdvertiseW} msg={message} title={titleModal}/>
                         <main style={{display:"flex"}}>
                             <div className="squareForm">
                                 <h3 className="h3-register" style={{position:'absolute', top:"15px", left:"60px"}}>Informacion de la publicacion</h3>
                                 <label htmlFor="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Titulo de la publicacion</label>      
                                 <input className="register-title-input" id="namePost" value={namePost} onChange={(e) => {setNamePost(e.target.value)}} style={{position:'absolute',top:"110px", left:"60px"}} placeholder='Ej: Sonidos de Cartago' required ></input>
 
-                                <label htmlFor="namePost" style={{position:'absolute',top:"160px", left:"60px"}}>Archivo de sonido (50MB MAX) (MP3, WAV, OGG)</label>      
-                                <input id="namePost" type="file" accept="audio/*" onChange={handleAudioSelect} style={{position:'absolute',top:"190px", left:"60px"}}></input>
+                                <label htmlFor="namePost" style={{position:'absolute',top:"160px", left:"60px"}}>Archivo de sonido (50MB MAX) (mp3, wav, ogg, mp4)</label>      
+                                <input id="namePost" type="file" accept="audio/*, video/mp4" onChange={handleAudioSelect} style={{position:'absolute',top:"190px", left:"60px"}}></input>
                                 {sound && (
                                     <audio controls style={{position:'absolute',top:"220px", left:"60px"}} className="player-desing">
                                         <source src={sound} type="audio/mpeg" />
@@ -128,8 +261,8 @@ function RegisterPage() {
                                     </audio>
                                 )}
 
-                                <label htmlFor="namePost" style={{position:'absolute',top:"280px", left:"60px"}}>Foto (50MB MAX) (PNG, GIF, JPG, JPEG)</label>      
-                                <input id="namePost" type="file" accept="image/*" onChange={handleImageSelect} style={{position:'absolute',top:"310px", left:"60px"}}></input>
+                                <label htmlFor="namePost" style={{position:'absolute',top:"280px", left:"60px"}}>Foto (50MB MAX) (png, gif, jpg, jpeg)</label>      
+                                <input id="namePost" type="file" accept="image/*" name="picture" onChange={handleImageSelect} style={{position:'absolute',top:"310px", left:"60px"}}></input>
                                 {!picture && (
                                     <div className="squarePreview"></div>
                                 )}
@@ -137,7 +270,7 @@ function RegisterPage() {
                                     <img className="preview" src={picture} alt="Vista previa de la imagen" />
                                 )}
                                 <label htmlFor="namePost" style={{position:'absolute',top:"610px", left:"60px"}}>Detalles o comentarios</label>      
-                                <textarea className='register-details' id="namePost" value={postDetails} onChange={(e) => {setPostDetails(e.target.value)}} style={{position:'absolute',top:"640px", left:"60px"}} rows="11" cols="41" placeholder='Cuentenos la historia de su sonido pura vida.'></textarea>
+                                <textarea className='register-details' id="namePost" value={postDetails} onChange={(e) => {setPostDetails(e.target.value)}} style={{position:'absolute',top:"640px", left:"60px"}} rows="11" cols="41" placeholder='Cuentenos la historia de su sonido Pura Vida.'></textarea>
                                 {/** FORM DIVISION, POST INFO UP - USER INFO DOWN   */}
                                 
                                 <h3 className="h3-register" style={{position:'absolute',top:"15px", left:"600px"}}>Informacion del Autor</h3>
@@ -179,17 +312,18 @@ function RegisterPage() {
                                     </Marker>
                         
                                 </MapContainer>
-
-                                <button className="register-button" style={{position:"relative", top:"830px", left:"1090px"}} onClick={registerPost}>GUARDAR</button>
+                                <div>
+                                <button className="register-button" style={{position:"relative", top:"430px", left:"1090px"}} onClick={registerPost}>Guardar</button>
+                                </div>
+                                
                                                     
                             </div>
                             <div className="squareNews">
                                 <div className="squareNews-inside1">
-                                    <h1 className="h1-preview">LOS SONIDOS DEL PURA VIDA</h1>
+                                    <h1 className="h1-preview">SONIDOSDEL PURA VIDA</h1>
                                 </div>
                                 <div className="squareNews-inside2">
                                     <p>“Los sonidos del Pura Vida” consiste en un mapa sonoro de Costa Rica, con el objetivo de crear una memoria de sonidos de nuestro país.</p>
-                                    <button className="explore-button">Explorar</button>
                                 </div>
                                 
                                 
@@ -198,6 +332,7 @@ function RegisterPage() {
                         
 
                         <footer>
+                            <img src={urlImage}></img>
                             <Footer/>
                         </footer>
                 

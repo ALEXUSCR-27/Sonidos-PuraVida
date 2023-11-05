@@ -33,7 +33,7 @@ function AdminLogin() {
 
 
     const login = () => {
-        const route = "/server/router/routes.php?action=adminModule";
+        const route = "/server/router.php?action=adminModule";
         const data = {
             username:username,
             password:password

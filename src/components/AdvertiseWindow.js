@@ -16,8 +16,8 @@ function AdvertiseWindow({ isOpen, onRequestClose, msg, title }) {
             <div>
                 <h3 className='h3-modal'>{msg}</h3>
             </div>
-            <div className='buttonsYN-modal'>
-                <button  onClick={onRequestClose}>Cerrar</button>
+            <div className='buttonClose-modal'>
+                <button className='closeModal-button'  onClick={onRequestClose}>Cerrar</button>
             </div>
             
         </div>

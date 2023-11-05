@@ -79,7 +79,7 @@ function AdminPage() {
 
     useEffect(() => {
         window.scrollTo(0, 0);  
-        const route = "/server/router/routes.php?action=getPost";
+        const route = "/server/router.php?action=getPost";
         const data = {}
         axios.post(url+route, data)
         .then((response) => {
@@ -101,7 +101,7 @@ function AdminPage() {
     }, []);
 
     const reset = () => {
-        const route = "/server/router/routes.php?action=getPost";
+        const route = "/server/router.php?action=getPost";
         const data = {}
         axios.post(url+route, data)
         .then((response) => {
@@ -133,7 +133,7 @@ function AdminPage() {
     } 
 
     const deletePost = () => {
-        const route = "/server/router/routes.php?action=deletePost";
+        const route = "/server/router.php?action=deletePost";
         const id = {
             id:idPost
         };
@@ -141,6 +141,7 @@ function AdminPage() {
         .then((response) => {
             setOpenConfirmW(false);
             reset();
+            console.log(response);
             
         })
         .catch((error) => {
@@ -193,7 +194,7 @@ function AdminPage() {
             fecha:date
         };
         console.log(data);
-        const route = "/server/router/routes.php?action=filterPosts";
+        const route = "/server/router.php?action=filterPosts";
         axios.post(url+route, data)
         .then((response) => {
             if (response.data.length === 0) {

@@ -23,7 +23,7 @@ function MainPage() {
     //sa
     useEffect(() => {
         window.scrollTo(0, 0);  
-        const route = "/server/router/routes.php?action=getPost";
+        const route = "/server/router.php?action=getPost";
         const data = {}
         axios.post(url+route, data)
         .then((response) => {
