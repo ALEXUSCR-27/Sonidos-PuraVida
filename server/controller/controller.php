@@ -4,7 +4,7 @@ include "./model/model.php";
 function registerPost($data) {
     //validar recaptcha
     echo json_encode($data);
-    //registerPostInDB($data);
+    registerPostInDB($data);
      
 }
 
