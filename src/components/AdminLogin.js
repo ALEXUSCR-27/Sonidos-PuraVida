@@ -5,7 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import AdvertiseWindow from './AdvertiseWindow';
 
-import '../syles/admin.css'
+import '../styles/admin.css'
 function AdminLogin() {
     const urlPort = process.env.REACT_APP_LOCAL_HOST_PORT_URL;
     const url = process.env.REACT_APP_LOCAL_HOST_URL;

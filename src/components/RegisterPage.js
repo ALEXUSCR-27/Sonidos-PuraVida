@@ -9,8 +9,8 @@ import Footer from './Footer';
 import AdvertiseWindow from './AdvertiseWindow';
 
 //STYLES
-import "../syles/registerPage.css";
-import "../syles/general.css";
+import "../styles/registerPage.css";
+import "../styles/general.css";
 
 
 function RegisterPage() {
@@ -103,7 +103,7 @@ function RegisterPage() {
         }
         else {
             setTitleModal("Aviso!");
-            setMessage("Ha seleccionado un formato de imagen invalido, sino selecciona alguno de estos (png, jpg, jpeg, gif), su publicacion se registrara sin imagen!");
+            setMessage("Ha seleccionado un formato de imagen invalido, debe seleccionar alguno de estos formatos (png, jpg, jpeg, gif), sino su publicacion se registrara sin imagen!");
             setOpenAdvertiseW(true);
             setPicture(null);
         }
@@ -111,42 +111,49 @@ function RegisterPage() {
     
     const registerPost = async () => {
         if (validatePublication()) {
-            await uploadFiles();
-            const route = "/server/router.php?action=registerPost";
-            const data = {
-                namePost:namePost,
-                sound:urlSound,
-                picture:urlImage,
-                username:username,
-                lastname:lastname,
-                postDetails:postDetails,
-                lat:lat,
-                long:long,
-                province:province
-            };
-            console.log(data);
-            console.log(url+route);
-            axios.post(url+route, data)
-            .then((response) => {
-                setTitleModal("Aviso!");
-                setMessage("El registro de su publicacion ha sido exitoso!");
-                setOpenAdvertiseW(true);
-                resetFilters();
-                console.log(response);
-            })
-            .catch((error) => {
-                setTitleModal("Aviso!");
-                setMessage("Se ha producido un error al intentar registrar su publicacion. Intente de nuevo!");
-                setOpenAdvertiseW(true);
-                console.error("Error", error);
-            });
+            try {
+                const uploaded = await uploadFiles();
+                if (uploaded) {
+                    const route = "/server/router.php?action=registerPost";
+                    const data = {
+                        namePost:namePost,
+                        sound:urlSound,
+                        picture:urlImage,
+                        username:username,
+                        lastname:lastname,
+                        postDetails:postDetails,
+                        lat:lat,
+                        long:long,
+                        province:province
+                    };
+                    console.log(data);
+                    console.log(url+route);
+                    axios.post(url+route, data)
+                    .then((response) => {
+                        setTitleModal("Aviso!");
+                        setMessage("El registro de su publicacion ha sido exitoso!");
+                        setOpenAdvertiseW(true);
+                        resetFilters();
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        setTitleModal("Aviso!");
+                        setMessage("Se ha producido un error al intentar registrar su publicacion. Intente de nuevo!");
+                        setOpenAdvertiseW(true);
+                        console.error("Error", error);
+                    });
+                }
+            }
+            catch(error) {
+                console.error("Error al subir archivos:", error);
+            }
         }
         
 
     };
 
-    const uploadFiles = () => {
-        return new Promise((resolve, reject) => {
+    const uploadFiles = async () => {
+        return new Promise( async (resolve, reject) => {
             const data = {
                 files:formData
             }
@@ -158,7 +165,7 @@ function RegisterPage() {
                   'Content-Type': 'multipart/form-data',
                 },
               })
-                .then((response) => {
+                .then(async (response) => {
                   if (!response.data.successIMG) {
                     setTitleModal("Aviso!");
                     setMessage("Ha surgido un problema al intentar subir la imagen de la publicacion!");
@@ -166,16 +173,18 @@ function RegisterPage() {
                     setPicture(null);
                   }
                   else {
-                    setUrlImage(url+'/server/'+response.data.imageUrl);
+                    await setUrlImage(url+'/server/'+response.data.imageUrl);
                   }
                   if (!response.data.successAUD) {
                     setTitleModal("Aviso!");
                     setMessage("Ha surgido un problema al intentar subir su sonido Pura Vida!");
                     setOpenAdvertiseW(true);
                     setSound(null);
+                    reject("Error al subir el audio");
                   }
                   else {
-                    setUrlSound(url+'/server/'+response.data.audioUrl);
+                    await setUrlSound(url+'/server/'+response.data.audioUrl);
+                    console.log(response.data.audioUrl);
                     resolve(true);
                   }
                   
@@ -184,6 +193,7 @@ function RegisterPage() {
                 })
                 .catch((error) => {
                   console.error('Error al cargar la imagen:', error);
+                  reject("Error al subir los archivos");
             });
         })
         
@@ -217,7 +227,7 @@ function RegisterPage() {
 
         if (sound == null) {
             setTitleModal("Aviso!");
-            setMessage("Por favor ingrese un archivo de sonido. Estos campos son obligatorios para continuar. Ademas tenga en cuenta los formatos validos (.mp3, .wav, .ogg, .mp4)");
+            setMessage("Por favor ingrese un archivo de sonido. Estos campos son obligatorios para continuar. Ademas tenga en cuenta los formatos validos (mp3, wav, ogg, mp4)");
             setOpenAdvertiseW(true);
             return false;
         }
@@ -248,8 +258,8 @@ function RegisterPage() {
                     <AdvertiseWindow isOpen={openAdvertiseW} onRequestClose={closeAdvertiseW} msg={message} title={titleModal}/>
                         <main style={{display:"flex"}}>
                             <div className="squareForm">
-                                <h3 className="h3-register" style={{position:'absolute', top:"15px", left:"60px"}}>Informacion de la publicacion</h3>
-                                <label htmlFor="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Titulo de la publicacion</label>      
+                                <h3 className="h3-register" style={{position:'absolute', top:"15px", left:"60px"}}>Información de la publicación</h3>
+                                <label htmlFor="namePost" style={{position:'absolute',top:"80px", left:"60px"}}>Título de la publicación</label>      
                                 <input className="register-title-input" id="namePost" value={namePost} onChange={(e) => {setNamePost(e.target.value)}} style={{position:'absolute',top:"110px", left:"60px"}} placeholder='Ej: Sonidos de Cartago' required ></input>
 
                                 <label htmlFor="namePost" style={{position:'absolute',top:"160px", left:"60px"}}>Archivo de sonido (50MB MAX) (mp3, wav, ogg, mp4)</label>      
@@ -270,17 +280,17 @@ function RegisterPage() {
                                     <img className="preview" src={picture} alt="Vista previa de la imagen" />
                                 )}
                                 <label htmlFor="namePost" style={{position:'absolute',top:"610px", left:"60px"}}>Detalles o comentarios</label>      
-                                <textarea className='register-details' id="namePost" value={postDetails} onChange={(e) => {setPostDetails(e.target.value)}} style={{position:'absolute',top:"640px", left:"60px"}} rows="11" cols="41" placeholder='Cuentenos la historia de su sonido Pura Vida.'></textarea>
+                                <textarea className='register-details' id="namePost" value={postDetails} onChange={(e) => {setPostDetails(e.target.value)}} style={{position:'absolute',top:"640px", left:"60px"}} rows="11" cols="45" placeholder='Cuentenos la historia de su sonido Pura Vida.'></textarea>
                                 {/** FORM DIVISION, POST INFO UP - USER INFO DOWN   */}
                                 
-                                <h3 className="h3-register" style={{position:'absolute',top:"15px", left:"600px"}}>Informacion del Autor</h3>
+                                <h3 className="h3-register" style={{position:'absolute',top:"15px", left:"600px"}}>Información del Autor</h3>
                                 <label htmlFor="namePost" style={{position:'absolute',top:"80px", left:"600px"}}>Nombre del autor</label>      
                                 <input className="register-user-loc-input" id="namePost" value={username} onChange={(e) => {setUsername(e.target.value)}} style={{position:'absolute',top:"110px", left:"600px"}} placeholder='Ej: Carlos'></input>
 
                                 <label htmlFor="namePost" style={{position:'absolute',top:"80px", left:"930px"}}>Primer Apellido</label>      
                                 <input className="register-user-loc-input" id="namePost" value={lastname} onChange={(e) => {setLastName(e.target.value)}} style={{position:'absolute',top:"110px", left:"930px"}} placeholder='Ej: Ramirez'></input>
 
-                                <h3 className='h3-register' style={{position:'absolute',top:"135px", left:"600px"}}>Ubicacion</h3>
+                                <h3 className='h3-register' style={{position:'absolute',top:"135px", left:"600px"}}>Ubicación</h3>
                                 <label htmlFor="namePost" style={{position:'absolute',top:"200px", left:"600px"}}>Latitud</label>      
                                 <input className="register-user-loc-input" id="namePost" value={lat} onChange={(e) => handleLatitud(e)} style={{position:'absolute',top:"230px", left:"600px"}}></input>
 
@@ -320,7 +330,7 @@ function RegisterPage() {
                             </div>
                             <div className="squareNews">
                                 <div className="squareNews-inside1">
-                                    <h1 className="h1-preview">SONIDOSDEL PURA VIDA</h1>
+                                    <h1 className="h1-preview">SONIDOS DEL PURA VIDA</h1>
                                 </div>
                                 <div className="squareNews-inside2">
                                     <p>“Los sonidos del Pura Vida” consiste en un mapa sonoro de Costa Rica, con el objetivo de crear una memoria de sonidos de nuestro país.</p>
@@ -332,7 +342,7 @@ function RegisterPage() {
                         
 
                         <footer>
-                            <img src={urlImage}></img>
+                      
                             <Footer/>
                         </footer>
                 

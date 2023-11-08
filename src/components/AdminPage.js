@@ -2,7 +2,7 @@ import React, { useState, useEffect, useSyncExternalStore } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 
-import '../syles/admin.css'
+import '../styles/admin.css'
 
 import ConfirmWindow from './ConfirmWindow';
 import AdvertiseWindow from './AdvertiseWindow';

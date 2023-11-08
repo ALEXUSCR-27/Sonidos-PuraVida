@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 
-import '../syles/general.css'
+import '../styles/general.css'
 
 function AdvertiseWindow({ isOpen, onRequestClose, msg, title }) {
     return (

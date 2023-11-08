@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 //STYLES
-import '../syles/general.css';
+import '../styles/general.css';
 
 export default function Header() {
     const urlPort = process.env.REACT_APP_LOCAL_HOST_PORT_URL;
@@ -17,7 +17,10 @@ export default function Header() {
             </div>
             <div className="header-navbar">
                     <Link to={urlPort}>
-                        <button className="header-navbar-buttons">INICIO</button>
+                        <button className="header-navbar-buttons">Inicio</button>
+                    </Link>
+                    <Link to={urlPort+"terms&conditions"}>
+                        <button className="header-navbar-buttons">Términos de Uso</button>
                     </Link>
                     
             </div>

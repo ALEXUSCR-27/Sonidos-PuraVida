@@ -1,0 +1,187 @@
+.main-map {
+    width: 100%;
+    height: 600px;
+    
+    
+}
+
+.map-section {
+    width: 50%;
+}
+
+.addPost-button {
+    width: 200px;
+    height: 200px;
+    border: 0;
+    background-image: url(../assets/images/upload_rmbg.png);
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    margin-left: 380px;
+    margin-top: 40px;
+}
+
+.about-section {
+    width: 50%;
+    height: 600px;
+    position: relative;
+    display:grid;
+    grid-template-rows: 40% 60%;
+}
+
+.about-section-inside-top {
+    width: 98%;
+    height: 100%;
+    color: black;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 10px;
+    font-family: 'Open Sans', 'sans-serif';
+}
+
+.about-section-inside-bottom {
+    width: 100%;
+    height: 100%;
+
+    font-family: 'Lato';
+    background-color: #F7F7F7;
+
+}
+
+.postButton-section {
+    height: 290px;
+}
+
+.h2-about {
+    color: black;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    position: relative;
+    top:15px;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    font-size: 30px;
+
+    
+}
+
+.postButton-title {
+    
+    height: 70px;
+}
+
+
+.main-div {
+    display: block;
+    
+}
+
+.h1-main {
+    font-family: 'Lato';
+    text-align: center;
+    font-weight: 800;
+    font-size: 40px;
+    margin-top: 0;
+    position: relative;
+    top: 50px;
+    color: rgb(0, 0, 0);
+
+}
+
+.main-title {
+    position: relative;
+    top:0;
+    background-color: #FFC211;
+    height: 150px;
+}
+
+.form-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #2E3D4A;
+}
+
+.buttons-div-main {
+    margin: auto;
+    position: relative;
+    bottom: 25px;
+    margin-right: 130px;
+}
+
+.button-search:hover {
+    background-color: #FFC211;
+}
+
+.button-search-main {
+    margin-top: 15%;
+    background-color: rgba(1,87,155,1);
+    margin-left: 20px;
+    position:relative;
+}
+
+.button-search-main, .button-details-main {
+    width: 145px;
+    height: 35px;
+    text-align: center;
+    border-radius: 2px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: aliceblue;
+    cursor: pointer;
+    border: 0;
+}
+
+.button-search-main:hover, .button-details-main:hover {
+    background-color: rgb(0, 62, 109);
+}
+
+.button-details-main {
+    background-color: rgba(1,87,155,1);
+    margin-left: 20px;
+    position:relative;
+}
+
+.button-details-main:hover {
+    background-color: #FFC211;
+}
+
+.label-main {
+    display: block;
+    margin-bottom: 5px;
+    color: #FFC211;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    
+}
+
+.input-div {
+    position: relative;
+    margin-top: 10px;
+    left: 50px;
+    margin-left: 50px;
+    font-family: 'Lato', sans-serif;
+
+}
+
+.player-desing-main{
+    background-color: #ffffff;
+    height: 40px;
+    border-radius: 3px;
+}
+
+.sonido {
+    color: #364c7e;
+}
+
+.pv {
+    color: #c71f30;
+}
+
+.sonido, .pv {
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+}

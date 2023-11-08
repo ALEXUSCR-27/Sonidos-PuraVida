@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 
-import '../syles/general.css'
+import '../styles/general.css'
 
 function ConfirmWindow({ isOpen, onRequestClose, msg, title , deletePost}) {
     return (

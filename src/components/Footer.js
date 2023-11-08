@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 //STYLES
-import '../syles/general.css';
+import '../styles/general.css';
 
 export default function Footer() {
     return (

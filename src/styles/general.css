@@ -1,0 +1,232 @@
+
+.header-square {
+   
+    width: 100%;
+    height: 315px;
+    position: relative;
+    justify-content: center;
+}
+
+.header-navbar {  
+    width: 100%;
+    height: 70px;
+    bottom: 0;
+    justify-content: center;    
+    align-items: center;
+    display: flex;
+    background-color: #364c7e;
+    
+}
+
+
+.header-logo {
+    background-image: url(../assets/images/BannerSonidos.png);
+    background-size:1000px;
+    background-position: center;
+    position:absolute;
+    background-size: cover;
+    width:550px;
+    height: 300px;
+    left: 685px;
+}
+
+.header-navbar-buttons {
+    width: auto;
+    height: 70px;
+    font-size: 20px;
+    background-color: #364c7e;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border: 0;
+    padding: 10px;
+    font-family: 'Raleway', 'sans-serif';
+    font-weight: 4  00;
+}
+
+.header-navbar-buttons:hover {
+    background-color: #2f416d;
+}
+
+.footer {
+    background-color:#0a0909;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 300px;
+}
+
+.player-desing{
+    background-color: #ffffff;
+    height: 40px;
+    border-radius: 3px;
+}
+
+table {
+    background-color: #F5F6F8;
+    width: 100%;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin-bottom: 100px;
+    font-family: 'Open Sans', 'sans-serif';
+    border-collapse: collapse;
+
+}
+th {
+    height: 50px;
+ 
+}
+tr {
+    
+    border: 1px solid rgba(128, 128, 128, 0.144);
+    height: 50px;
+}
+
+td {
+    
+    color:rgb(34, 58, 58);
+    height: 30px;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 220px;
+    background-color: #F5F6F8;
+    border: 0;
+
+
+    
+}
+
+
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.closeModal-button {
+    position: relative;
+    margin-left: 70%;
+    width: 60px;
+    height: 30px;
+    font-family: 'Open Sans', 'sans-serif';
+    font-weight: 600;
+    font-size: 15px;
+    background-color: #364c7e;
+    border: 0;
+    cursor: pointer;
+    color: #ffffff;
+
+}
+
+.closeModal-button:hover {
+    background-color: #FFC211;
+}
+
+
+
+.h1-modal, .h1-details, .h2-details {
+    font-family: 'Open Sans',  'sans-serif';
+    margin-left: 20px;
+    font-weight:bold;
+} 
+.h1-modal {
+    font-size: 25px;
+    color: #364c7e;
+}
+
+.h1-details {
+    font-size: 20px;
+} 
+
+.h2-details {
+    font-size: 18px;
+}
+
+.h3-modal {
+    font-family: 'Open Sans',  'sans-serif';
+    font-size: 16px;
+    margin-top: 30px;
+    margin-left: 20px;
+    font-weight: 300;
+}
+
+.buttonsYN-modal {
+    position: relative;
+    left: 400px;
+    top: 20px;
+
+}
+
+.buttonClose-modal {
+    position: relative;
+    left: 85px;
+    top: 20px;
+
+}
+
+.buttonY, .buttonN {
+    width: 60px;
+    height: 30px;
+    font-family: 'Open Sans',  'sans-serif';
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 30px;
+    color: #ffffff;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+.buttonY {
+    background-color: rgba(1,87,155,1);
+}
+
+.buttonN {
+    background-color: rgb(196, 5, 5);
+}
+
+
+.modal-details {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: 1200px;
+    height: 900px;
+    background-color: #F5F6F8;
+    border-radius: 5px;
+    border: 1px solid #d8d8d8;
+}
+
+
+.close-button {
+    position: relative;
+    width: 100px;
+    height: 40px;
+    font-family: 'Open Sans',  'sans-serif';
+    font-size: 14px;
+    font-weight: bold;
+
+    background-color: rgba(1,87,155,1);
+    color: #d8d8d8;
+    border: 2px solid rgba(133, 133, 133, 0.233);
+    border-radius: 3px;
+    top: 260px;
+    left: 970px;
+}

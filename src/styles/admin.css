@@ -1,0 +1,200 @@
+.h1-login {
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+    color: black;
+    font-size: 60px;
+    position: relative;
+    text-align: center;
+    font-size: 40px;
+}
+
+.input-login {
+    font-family: 'Lato', sans-serif;
+    display: block;
+    margin-left: 70px;
+    margin-top: 20px;
+    width: 300px;
+    height: 35px;
+    text-align: center;
+}
+
+.button-login {
+    background-color: rgba(1,87,155,1);
+    margin-left: 152.5px;
+    margin-top: 50px;
+
+}
+
+.button-home {
+    margin-top: 15%;
+    background-color: #233255f8;
+    margin-left: 70px;
+}
+
+.button-home, .button-login, .button-search {
+
+
+    width: 145px;
+    height: 35px;
+    text-align: center;
+    border-radius: 2px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: aliceblue;
+    cursor: pointer;
+    border: 0;
+}
+
+button:hover {
+    box-shadow: 0px 1px 1px rgba(24, 1, 1, 0.4); /* Nueva sombra en el hover */
+}
+
+
+.admin-square {
+
+    position: absolute;
+    width: 450px;
+    height: 500px;
+    margin-left: 735px;
+    margin-top: 10%;
+
+    background: #FFFFFF;
+    box-shadow: 0px 19px 40px rgba(0, 0, 0, 0.11);
+    border-radius: 20px;
+
+}
+
+.logo {
+    background-image: url(../assets/images/BannerSonidos.png);
+    margin-left: 610px;
+    margin-top: 20px;
+    background-position: center;
+    background-size: cover;
+    width:700px;
+    height: 250px;
+
+}
+
+.uned-logo {
+    background-image: url(../assets/images/uned_logo.png);
+    margin-left: 74px;
+    margin-top: 30px;
+    background-position: center;
+    background-size: cover;
+    width:301px;
+    height: 122px;
+
+}
+
+.form-admin {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.input-div {
+    position: relative;
+    left: 50px;
+    margin-left: 50px;
+    font-family: 'Lato', sans-serif;
+
+}
+
+
+.label-admin {
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    
+}
+
+.input-admin {
+    width: 200px;
+    height: 10px;
+    padding: 10px;
+    border: 1px solid rgba(1,87,155,1);
+    border-radius: 3px;
+}
+
+.buttons-div {
+    margin: auto;
+    position: relative;
+    bottom: 44px;
+    margin-right: 90px;
+}
+
+.select-admin {
+    width: 200px;
+    height: 32px;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(1,87,155,1);
+    border-radius: 3px;
+}
+
+
+.button-search {
+    margin-top: 15%;
+    background-color: rgba(1,87,155,1);
+    margin-left: 20px;
+    position:relative;
+}
+
+.admin-mapSection {
+    width: 50%;
+    margin-left: 20px;
+}
+
+
+.map-details {
+    height: 500px;
+    position: relative;
+
+    border: 0;
+}
+
+.div-details {
+    width: 45%;
+}
+
+.error-message {
+    color: red;
+    display: none;
+
+    
+}
+
+.h3-message {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    margin-left: 70px;
+    width: 280px;
+    height: 35px;
+    text-align: left;
+ 
+}
+.admin-header {
+    background-color: #1B5EB5;
+    height: 70px;
+}
+
+.sign-out {
+    width: 145px;
+    height: 35px;
+    text-align: center;
+    border-radius: 2px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-color: #8F2D56;
+    border: 0;
+    margin-top: 20px;
+    margin-left: 1687px;
+}
+  
