@@ -1,6 +1,6 @@
 //LIBRARIES
 import React, { useState, useEffect} from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents} from "react-leaflet";
 import axios from 'axios';
 
 //COMPONENTS
@@ -29,11 +29,11 @@ function RegisterPage() {
     const [username, setUsername] = useState("");
     const [lastname, setLastName] = useState("");
     const [postDetails, setPostDetails] = useState("");
-    const [lat, setLat] = useState(9.748917);
-    const [long, setLong] = useState(-83.753428);
+    const [latitude, setLat] = useState(9.93333);
+    const [longitude, setLong] = useState(-84.08333);
     const [province, setProvince] = useState("");
     const [zoom] = useState(7);
-    const position = [lat, long];
+    const position = [latitude, longitude];
     const [formData, setFormData] = useState(null);
     const [urlImage, setUrlImage] = useState("");
     const [urlSound, setUrlSound] = useState("");
@@ -117,15 +117,17 @@ function RegisterPage() {
                     const route = "/server/router.php?action=registerPost";
                     const data = {
                         namePost:namePost,
-                        sound:urlSound,
-                        picture:urlImage,
+                        sound:uploaded.urlSou,
+                        picture:uploaded.urlPic,
                         username:username,
                         lastname:lastname,
                         postDetails:postDetails,
-                        lat:lat,
-                        long:long,
+                        lat:latitude,
+                        long:longitude,
                         province:province
                     };
+                    console.log(uploaded);
+                    
                     console.log(data);
                     console.log(url+route);
                     axios.post(url+route, data)
@@ -157,6 +159,7 @@ function RegisterPage() {
             const data = {
                 files:formData
             }
+            let urls = {};
             console.log(data);
             const route = "/server/router.php?action=uploadFiles";
             console.log(url+route);
@@ -165,31 +168,27 @@ function RegisterPage() {
                   'Content-Type': 'multipart/form-data',
                 },
               })
-                .then(async (response) => {
+                .then((response) => {
                   if (!response.data.successIMG) {
                     setTitleModal("Aviso!");
                     setMessage("Ha surgido un problema al intentar subir la imagen de la publicacion!");
                     setOpenAdvertiseW(true);
-                    setPicture(null);
+                    urls["urlPic"] = "";
                   }
                   else {
-                    await setUrlImage(url+'/server/'+response.data.imageUrl);
+                    urls["urlPic"] = url+'/server/'+response.data.imageUrl;
                   }
                   if (!response.data.successAUD) {
                     setTitleModal("Aviso!");
                     setMessage("Ha surgido un problema al intentar subir su sonido Pura Vida!");
                     setOpenAdvertiseW(true);
-                    setSound(null);
+                    urls["urlSou"] = "";
                     reject("Error al subir el audio");
                   }
                   else {
-                    await setUrlSound(url+'/server/'+response.data.audioUrl);
-                    console.log(response.data.audioUrl);
-                    resolve(true);
+                    urls["urlSou"] = url+'/server/'+response.data.audioUrl;
                   }
-                  
-                  console.log(response);
-    
+                  resolve(urls);
                 })
                 .catch((error) => {
                   console.error('Error al cargar la imagen:', error);
@@ -244,6 +243,18 @@ function RegisterPage() {
         setSound(null);
     }
 
+    const LocationFinderDummy = () => {
+        const map = useMapEvents({
+            click(e) {
+                const { lat, lng } = e.latlng;
+                setLat(lat);
+                setLong(lng);
+                console.log("lat:"+lat+"long:"+lng);
+            },
+        });
+        return null;
+    };
+
 
 
     
@@ -291,11 +302,12 @@ function RegisterPage() {
                                 <input className="register-user-loc-input" id="namePost" value={lastname} onChange={(e) => {setLastName(e.target.value)}} style={{position:'absolute',top:"110px", left:"930px"}} placeholder='Ej: Ramirez'></input>
 
                                 <h3 className='h3-register' style={{position:'absolute',top:"135px", left:"600px"}}>Ubicación</h3>
+
                                 <label htmlFor="namePost" style={{position:'absolute',top:"200px", left:"600px"}}>Latitud</label>      
-                                <input className="register-user-loc-input" id="namePost" value={lat} onChange={(e) => handleLatitud(e)} style={{position:'absolute',top:"230px", left:"600px"}}></input>
+                                <h4 className="h4-register" id="namePost"  style={{position:'absolute',top:"210px", left:"600px"}}>{latitude}</h4>
 
                                 <label htmlFor="namePost" style={{position:'absolute',top:"200px", left:"930px"}}>Longitud</label>      
-                                <input type='text' className="register-user-loc-input"  id="namePost" value={long} onChange={(e) => handleLong(e)} style={{position:'absolute',top:"230px", left:"930px"}}></input>
+                                <h4 type='text' className="h4-register"  id="namePost" style={{position:'absolute',top:"210px", left:"930px"}}>{longitude}</h4>
                                 
                                 <label style={{position:'absolute',top:"270px", left:"600px"}} htmlFor="provincia">Provincia</label>
                                 <select className='select-register' value={province} onChange={(e) => handleProvince(e)} style={{position:'absolute',top:"300px", left:"600px"}}   id="provincia">
@@ -310,7 +322,7 @@ function RegisterPage() {
                                 </select>
                          
 
-                                <MapContainer className="mapPost-desing" center={position} zoom={zoom}>
+                                <MapContainer className="mapPost-desing" center={position} zoom={zoom} >
                                     <TileLayer
                                     url = {urlLeaflet}
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -320,7 +332,7 @@ function RegisterPage() {
                                         Tu ubicación actual.
                                         </Popup>
                                     </Marker>
-                        
+                                    <LocationFinderDummy />
                                 </MapContainer>
                                 <div>
                                 <button className="register-button" style={{position:"relative", top:"430px", left:"1090px"}} onClick={registerPost}>Guardar</button>

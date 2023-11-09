@@ -18,10 +18,13 @@ function MainPage({setPublication}) {
     const position = [9.748917, -83.753428];
     const [publications, setPublications] = useState([{}]);
     const [empty, setEmpty] = useState(false);
+    const [mapPosts, setMapPosts] = useState([]);
 
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [province, setProvince] = useState("");
+    const [flag, setFlag] = useState(false);
+    const [flag2, setFlag2] = useState(false);
 
     const urlLeaflet = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
@@ -30,25 +33,47 @@ function MainPage({setPublication}) {
     useEffect(() => {
         window.scrollTo(0, 0);  
         const route = "/server/router.php?action=getPost";
-        const data = {}
+        let data = {}
         axios.post(url+route, data)
         .then((response) => {
             if (response.data.length === 0) {
                 setEmpty(false);
             }
             else {
+                console.log(response.data);
                 setEmpty(true);
+                data = response.data;
                 setPublications(response.data);
+                data.map((pub, index) => {
+                    if (mapPosts.length<=publications.length) {
+                        const points = getLatLong(pub.coordenadas);
+                        points["titulo"] = pub.titulo;
+                        points["id"] = pub.codigoPublicacion;
+                        points["descripcion"] = pub.descripcion;
+                        points["autor"] = pub.autor;
+                        points["foto"] = pub.foto;
+                        points["coordenadas"] = pub.coordenadas;
+                        points["fecha"] = pub.fecha;
+                        points["provincia"] = pub.provincia;
+                        points["audio"] = pub.audio;
+                        let res = mapPosts;
+                        res.push(points);
+                        setMapPosts(res);
+                        console.log(mapPosts);
+                    }
+                    
+                })
+                setFlag2(true);
             }
-            
-            console.log(response.data);
-            
         })
         .catch((error) => {
             alert("Surgio un error");
             console.error("Error", error);
         });
-    }, []);
+    }
+    , []);
+
+
 
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -69,14 +94,15 @@ function MainPage({setPublication}) {
     }
 
     const filterPosts = () => {
+        setFlag2(false);
         const data = {
             titulo:title,
             autor:author,
             provincia:province,
             fecha:"1990-01-01"
         };
-        console.log(data);
         const route = "/server/router.php?action=filterPosts";
+        let data2 = {};
         axios.post(url+route, data)
         .then((response) => {
             if (response.data.length === 0) {
@@ -85,6 +111,30 @@ function MainPage({setPublication}) {
             else {
                 setEmpty(true);
                 setPublications(response.data);
+                setFlag(true);
+                data2 = response.data;
+                let res = [];
+                data2.map((pub, index) => {
+                    if (res.length<=data2.length) {
+                        const points = getLatLong(pub.coordenadas);
+                        points["titulo"] = pub.titulo;
+                        points["id"] = pub.codigoPublicacion;
+                        points["descripcion"] = pub.descripcion;
+                        points["autor"] = pub.autor;
+                        points["foto"] = pub.foto;
+                        points["coordenadas"] = pub.coordenadas;
+                        points["fecha"] = pub.fecha;
+                        points["provincia"] = pub.provincia;
+                        points["audio"] = pub.audio;
+                        res.push(points);
+                        setMapPosts(res);
+                        
+                    }
+                    
+                })
+                setFlag2(true);
+
+
             }
         })
         .catch((error) => {
@@ -98,6 +148,23 @@ function MainPage({setPublication}) {
         setPublication(pubData);
         navigate("/seePublication");
     }
+
+    const getLatLong = (data) => {
+
+        const expresion = /\(([^)]+)\)/;
+        const coordenadas = data.match(expresion);
+        const coordenadasSplit = coordenadas[1].split(' ');
+            
+        const res = {
+            latitude:parseFloat(coordenadasSplit[0]),
+            longitude:parseFloat(coordenadasSplit[1])
+        }
+        return res;
+        
+ 
+        
+    }
+
 
  
     return(
@@ -116,11 +183,25 @@ function MainPage({setPublication}) {
                                         url = {urlLeaflet}
                                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                     />
-                                    <Marker position={position}>
+                                    {flag2 && mapPosts.map((point, index) => (
+                                        <Marker
+                                        key={index}
+                                        
+                                        position={[point.latitude, point.longitude]}
+                                        >
                                         <Popup>
-                                            Tu ubicación actual.
+                                            {point.titulo}
+                                            <br />
+                                            Latitud: {point.latitude}
+                                            <br />
+                                            Longitud: {point.longitude}
+                                            <br/>
+                                            <button onClick={() => {
+                                                preparePublication(point);
+                                            }}>Ver mas</button>
                                         </Popup>
-                                    </Marker>
+                                        </Marker>
+                                    ))}
                                         
                                 </MapContainer>
                             </div>
@@ -204,6 +285,7 @@ function MainPage({setPublication}) {
                                                             <source src={val.audio} type="audio/mpeg" />
                                                             Tu navegador no soporta la reproducción de audio.
                                                         </audio>
+                                                        
                                                         </td>
                                                         <td>{val.autor}</td>
                                                         <td>
