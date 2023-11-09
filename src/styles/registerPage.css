@@ -137,6 +137,12 @@
     font-size: 19px;
 }
 
+.h4-register {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
 .register-title-input {
   width: 400px;
   height: 25px;

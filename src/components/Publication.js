@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams} from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap} from "react-leaflet";
 import Header from "./Header";
 import Footer from "./Footer";
 
 import '../styles/publication.css'
 function Publication({data}) {
     const urlLeaflet = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-    const [position, setPosition] = useState([9.748917, -83.753428]);
+    const [position, setPosition] = useState([0, 0]);
     const [lat, setLat] = useState(0);
     const [long, setLong] = useState(0);
     const [zoom] = useState(14);
@@ -26,6 +26,12 @@ function Publication({data}) {
         console.log(position);
       }, []);
     console.log(data);
+
+    const ChangeView = ({ center, zoom }) => {
+        const map = useMap();
+        map.setView(center, zoom);
+        return null;
+    }
     
     return (
         <div>
@@ -35,7 +41,8 @@ function Publication({data}) {
             <main>
                 <div className='publication-div' style={{display:"flex"}}>
                     <div className="mapPublication-section">
-                        <MapContainer className="publication-map" center={position} zoom={zoom}>
+                        <MapContainer id="map" className="publication-map" center={position} zoom={zoom}>
+                        <ChangeView center={position} zoom={zoom} />
                             <TileLayer
                                 url = {urlLeaflet}
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
