@@ -163,10 +163,10 @@ function uploadFilesInDB($data) {
     // Asegúrate de validar o sanitizar la entrada antes de usarla en un comando shell.
 
     // Construye el comando chmod
-    $comando = "sudo chmod -R $permisos $carpeta";
+    //$comando = "sudo chmod -R $permisos $carpeta"; //pide contra
 
     // Ejecuta el comando
-    $resultado = exec($comando, $salida, $codigo_salida);
+    //$resultado = exec($comando, $salida, $codigo_salida);
         
     if (!is_dir($upload_dir_IMG)) {
         echo "no existe";
