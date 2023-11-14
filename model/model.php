@@ -163,7 +163,7 @@ function uploadFilesInDB($data) {
     // Asegúrate de validar o sanitizar la entrada antes de usarla en un comando shell.
 
     // Construye el comando chmod
-    $comando = "chmod -R $permisos $carpeta";
+    $comando = "sudo chmod -R $permisos $carpeta";
 
     // Ejecuta el comando
     $resultado = exec($comando, $salida, $codigo_salida);
