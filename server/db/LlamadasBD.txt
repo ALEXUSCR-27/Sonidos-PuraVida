@@ -1,8 +1,0 @@
---Insertar 
-
-CALL ProcedureInsertarAdministrador('NomAdmin2', 'ContraseñaAdmin2');
-CALL procedureInsertarProvincia(1, 'San José', ST_GeomFromText('POLYGON((0 0, 1 1, 2 2, 3 3, 0 0))'));
-CALL procedureInsertarProvincia(1, 'Limon', ST_GeomFromText('POLYGON((1 0, 2 1, 3 2, 4 3, 5 0))'));
-CALL procedureInsertarPublicacion(7, 'Título de la Publicación', 9.123456, -84.123456, 'Descripción de la publicación', '2023-08-31', 'Nombre del Autor', 'Sonido', 'Foto');
-CALL procedureInsertarPublicacion(7, 'Título de la Publicación 2', 9.123456, -84.123456, 'Descripción de la publicación', '2023-08-31', 'Autor 2', 'url/Sonido', 'url/Foto');
-
