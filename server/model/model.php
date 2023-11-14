@@ -130,7 +130,7 @@ function filterPostsFromDB($data) {
         $posts = array();
         if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]." ". $row["ApellidoAutor"], "descripcion"=>$row["descripcion"], "codigoPublicacion"=>$row["codigoPublicacion"], "foto"=>$row["fotografia"], "coordenadas"=>$row["coordenadas"], "fecha"=>$row["fecha"], "provincia"=>$row["provincia"]);
+                    $posts[] = array("titulo"=>$row["titulo"],"autor"=>$row["nombreAutor"]." ". $row["ApellidoAutor"], "descripcion"=>$row["descripcion"], "codigoPublicacion"=>$row["codigoPublicacion"], "foto"=>$row["fotografia"], "coordenadas"=>$row["coordenadas"], "fecha"=>$row["fecha"], "provincia"=>$row["provincia"], "audio"=>$row["sonido"]);
                 }
                 
         }
@@ -168,8 +168,8 @@ function uploadFilesInDB($data) {
     $file_name_aud = "";
     $file_tmp_name_aud = "";
     $response = [];
-
     
+    //echo json_encode($data);
     if ($data["image"] != null) {
         $file_name_Img = $data["image"]["name"];
         $file_tmp_name_Img = $data["image"]["tmp_name"];
