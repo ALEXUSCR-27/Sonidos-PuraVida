@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.9ddd1790.css",
-    "main.js": "./static/js/main.c389d0af.js",
+    "main.js": "./static/js/main.bb144e76.js",
     "static/js/787.104a5c84.chunk.js": "./static/js/787.104a5c84.chunk.js",
     "static/media/costarica-news.jpg": "./static/media/costarica-news.25a2a1d69c0699a80b9a.jpg",
     "static/media/costaRica.jpg": "./static/media/costaRica.a0c3230870326597d4e3.jpg",
@@ -10,11 +10,11 @@
     "static/media/upload_rmbg.png": "./static/media/upload_rmbg.8f6becdb75a859c127aa.png",
     "index.html": "./index.html",
     "main.9ddd1790.css.map": "./static/css/main.9ddd1790.css.map",
-    "main.c389d0af.js.map": "./static/js/main.c389d0af.js.map",
+    "main.bb144e76.js.map": "./static/js/main.bb144e76.js.map",
     "787.104a5c84.chunk.js.map": "./static/js/787.104a5c84.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9ddd1790.css",
-    "static/js/main.c389d0af.js"
+    "static/js/main.bb144e76.js"
   ]
 }
