@@ -157,7 +157,17 @@ function generateName($file_name, $upload_dir) {
 function uploadFilesInDB($data) {
     $upload_dir_IMG = SITE_ROOT.'/uploads/postImages/';
     $upload_dir_AUD = SITE_ROOT.'/uploads/postSounds/';
-    
+    $carpeta = SITE_ROOT.'/uploads';
+    $permisos = "755";
+
+    // Asegúrate de validar o sanitizar la entrada antes de usarla en un comando shell.
+
+    // Construye el comando chmod
+    $comando = "chmod -R $permisos $carpeta";
+
+    // Ejecuta el comando
+    $resultado = exec($comando, $salida, $codigo_salida);
+        
     if (!is_dir($upload_dir_IMG)) {
         echo "no existe";
         //mkdir($uploadDir, 0755, true);
