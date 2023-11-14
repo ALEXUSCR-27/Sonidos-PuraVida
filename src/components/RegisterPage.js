@@ -58,17 +58,18 @@ function RegisterPage() {
         if (allowedExtensions.includes(`.${fileExtension}`)) {
             if (file) {
             // Validar que el archivo sea de tipo audio si lo deseas
-                if (file.type.startsWith("audio/") || file.type.startsWith("video/")) {
-                    
+            
+                if (file.type.startsWith("audio/") || file.type.startsWith("video/")) {        
                     setSound(URL.createObjectURL(file));
                     let formDataAudio = new FormData();
-                    if (formData != null) {
-                        formDataAudio = formData;
+                    if (formData!=null) {
+                        if (formData.lenght>0 && formData.lenght<2) {
+                            formDataAudio = formData;
+                        }
                     }
-                    
                     formDataAudio.append('audio', file);
                     setFormData(formDataAudio);
-                    console.log("sound");
+                    //console.log(formDataAudio);
                 } else {
                     setTitleModal("Aviso!");
                     setMessage("Por favor selecciona un archivo de audio valido!");
@@ -92,9 +93,12 @@ function RegisterPage() {
         if (allowedExtensions.includes(`.${fileExtension}`)) {
             if (file) {
                 let formDataImg = new FormData();
-                if (formData != null) {
-                    formDataImg = formData;
+                if (formData!= null) {
+                    if (formData.lenght>0 && formData.lenght<2) {
+                        formDataImg = formData;
+                    }
                 }
+                
                 formDataImg.append('image', file);
                 setFormData(formDataImg);
                 const imageUrl = URL.createObjectURL(file);
@@ -126,9 +130,9 @@ function RegisterPage() {
                         long:longitude,
                         province:province
                     };
-                    console.log(uploaded);
+                    //console.log(uploaded);
                     
-                    console.log(data);
+                    //console.log(data);
                     console.log(url+route);
                     axios.post(url+route, data)
                     .then((response) => {
@@ -160,7 +164,8 @@ function RegisterPage() {
                 files:formData
             }
             let urls = {};
-            console.log(data);
+            //console.log("form");
+            //console.log(data);
             const route = "/server/router.php?action=uploadFiles";
             console.log(url+route);
             axios.post(url+route,formData, {
@@ -169,6 +174,7 @@ function RegisterPage() {
                 },
               })
                 .then((response) => {
+                    console.log(response);
                   if (!response.data.successIMG) {
                     setTitleModal("Aviso!");
                     setMessage("Ha surgido un problema al intentar subir la imagen de la publicacion!");
@@ -187,12 +193,13 @@ function RegisterPage() {
                   }
                   else {
                     urls["urlSou"] = url+'/server/'+response.data.audioUrl;
+                    resolve(urls);
                   }
-                  resolve(urls);
+                  
                 })
                 .catch((error) => {
-                  console.error('Error al cargar la imagen:', error);
-                  reject("Error al subir los archivos");
+                    console.error('Error al cargar la imagen:', error);
+                    reject("Error al subir los archivos");
             });
         })
         
@@ -277,7 +284,10 @@ function RegisterPage() {
                                 <input id="namePost" type="file" accept="audio/*, video/mp4" onChange={handleAudioSelect} style={{position:'absolute',top:"190px", left:"60px"}}></input>
                                 {sound && (
                                     <audio controls style={{position:'absolute',top:"220px", left:"60px"}} className="player-desing">
-                                        <source src={sound} type="audio/mpeg" />
+                                        <source src={sound} type="audio/mpeg"  />
+                                        <source src={sound} type="audio/wav"  />
+                                        <source src={sound} type="audio/mp4"  />
+                                        <source src={sound} type="audio/ogg"  />
                                         Tu navegador no soporta la reproducción de audio.
                                     </audio>
                                 )}

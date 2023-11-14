@@ -6,7 +6,6 @@ import axios from 'axios';
 //COMPONENTS
 import Header from './Header';
 import Footer from './Footer';
-import Publication from './Publication';
 
 //STYLES
 import '../styles/mainPage.css';
@@ -45,7 +44,7 @@ function MainPage({setPublication}) {
                 data = response.data;
                 setPublications(response.data);
                 data.map((pub, index) => {
-                    if (mapPosts.length<=publications.length) {
+                   
                         const points = getLatLong(pub.coordenadas);
                         points["titulo"] = pub.titulo;
                         points["id"] = pub.codigoPublicacion;
@@ -59,8 +58,9 @@ function MainPage({setPublication}) {
                         let res = mapPosts;
                         res.push(points);
                         setMapPosts(res);
+                        console.log("mapPosts:");
                         console.log(mapPosts);
-                    }
+                    
                     
                 })
                 setFlag2(true);
@@ -128,6 +128,7 @@ function MainPage({setPublication}) {
                         points["audio"] = pub.audio;
                         res.push(points);
                         setMapPosts(res);
+                        console.log(pub);
                         
                     }
                     
@@ -145,6 +146,8 @@ function MainPage({setPublication}) {
 
     }
     const preparePublication = (pubData) => {
+        console.log("pubdata:");
+        console.log(pubData);
         setPublication(pubData);
         navigate("/seePublication");
     }

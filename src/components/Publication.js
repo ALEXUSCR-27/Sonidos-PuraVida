@@ -19,19 +19,31 @@ function Publication({data}) {
         const expresion = /\(([^)]+)\)/;
         const coordenadas = data.coordenadas.match(expresion);
         const coordenadasSplit = coordenadas[1].split(' ');
-        console.log(coordenadas);
+        //console.log(coordenadas);
         setLat(parseFloat(coordenadasSplit[0]));
         setLong(parseFloat(coordenadasSplit[1]));
         setPosition([parseFloat(coordenadasSplit[0]),parseFloat(coordenadasSplit[1])]);
-        console.log(position);
+        //console.log(position);
       }, []);
-    console.log(data);
+    //console.log(data);
 
     const ChangeView = ({ center, zoom }) => {
         const map = useMap();
         map.setView(center, zoom);
         return null;
     }
+
+
+
+    const [showLargeImage, setShowLargeImage] = useState(false);
+
+  const openLargeImage = () => {
+    setShowLargeImage(true);
+  };
+
+  const closeLargeImage = () => {
+    setShowLargeImage(false);
+  };
     
     return (
         <div>
@@ -39,6 +51,11 @@ function Publication({data}) {
                 <Header/>
             </header>
             <main>
+            {showLargeImage && (
+                <div className="imageOpened" onClick={closeLargeImage}>
+                    <img src={data.foto} alt="Imagen en Grande" />
+                </div>
+            )}
                 <div className='publication-div' style={{display:"flex"}}>
                     <div className="mapPublication-section">
                         <MapContainer id="map" className="publication-map" center={position} zoom={zoom}>
@@ -93,14 +110,20 @@ function Publication({data}) {
                         </div>
                         
                         <div className="img-publication">
-                            <caption className="publicationPic-title">Foto</caption>
+                            
                             {!picture && (
                                 <div className="squarePreview-details"></div>
                             )}
                             {picture && (   
-                                <img className="square-img" src={data.foto}  alt="Vista previa de la imagen" />
+                                <div>
+                                    <h2 className="publicationPic-title">Vista previa de imagen, para ver la foto completa de clic sobre la imagen, de igual manera para salir de la vista completa.</h2>
+                                    <img  onClick={openLargeImage} className="square-img" src={data.foto}  alt="Vista previa de la imagen" />
+                                </div>
                             )}
+                            
                         </div>
+                        
+
                     </div>
                 </div>
             </main>
