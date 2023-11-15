@@ -88,7 +88,7 @@ button:hover {
 }
 
 .form-admin {
-    margin-top: 100px;
+    margin-top: 60px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -150,17 +150,6 @@ button:hover {
 }
 
 
-.map-details {
-    height: 500px;
-    position: relative;
-
-    border: 0;
-}
-
-.div-details {
-    width: 45%;
-}
-
 .error-message {
     color: red;
     display: none;
@@ -197,4 +186,6 @@ button:hover {
     margin-top: 20px;
     margin-left: 1687px;
 }
+
+
   

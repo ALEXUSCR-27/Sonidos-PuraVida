@@ -12,14 +12,14 @@ export default function Header() {
         <nav >
             <div className="header-square">
                 <div>
-                    <a className="header-logo" href={urlPort}></a>
+                    <a className="header-logo" href='/'></a>
                 </div>
             </div>
             <div className="header-navbar">
-                    <Link to={urlPort}>
+                    <Link to='/'>
                         <button className="header-navbar-buttons">Inicio</button>
                     </Link>
-                    <Link to={urlPort+"terms&conditions"}>
+                    <Link to={"/terms&conditions"}>
                         <button className="header-navbar-buttons">Términos de Uso</button>
                     </Link>
                     

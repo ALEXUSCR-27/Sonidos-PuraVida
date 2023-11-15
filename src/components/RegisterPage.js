@@ -63,13 +63,12 @@ function RegisterPage() {
                     setSound(URL.createObjectURL(file));
                     let formDataAudio = new FormData();
                     if (formData!=null) {
-                        if (formData.lenght>0 && formData.lenght<2) {
-                            formDataAudio = formData;
-                        }
+                        formDataAudio = formData;
                     }
                     formDataAudio.append('audio', file);
                     setFormData(formDataAudio);
-                    //console.log(formDataAudio);
+                    console.log("form audio");
+                    console.log(formDataAudio);
                 } else {
                     setTitleModal("Aviso!");
                     setMessage("Por favor selecciona un archivo de audio valido!");
@@ -94,9 +93,8 @@ function RegisterPage() {
             if (file) {
                 let formDataImg = new FormData();
                 if (formData!= null) {
-                    if (formData.lenght>0 && formData.lenght<2) {
-                        formDataImg = formData;
-                    }
+                    console.log(formData.lenght);
+                    formDataImg = formData;
                 }
                 
                 formDataImg.append('image', file);
@@ -164,10 +162,11 @@ function RegisterPage() {
                 files:formData
             }
             let urls = {};
-            //console.log("form");
-            //console.log(data);
+            console.log("form");
+            console.log(data);
             const route = "/server/router.php?action=uploadFiles";
             console.log(url+route);
+            //probar url o quitar
             axios.post(url+route,formData, {
                 headers: {
                   'Content-Type': 'multipart/form-data',

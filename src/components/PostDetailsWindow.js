@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-import '../styles/general.css'
+import '../styles/postDetailsW.css'
 
 function PostDetailsWindow({ isOpen, onRequestClose, title, posts, picture }) {
 
-  const [zoom] = useState(14);
+  const [zoom] = useState(13);
   const position = [posts[0].lat, posts[0].lng];
   const urlLeaflet = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
@@ -32,7 +32,7 @@ function PostDetailsWindow({ isOpen, onRequestClose, title, posts, picture }) {
       >
         <div>
             <div>
-                <h1 className='h1-details'>Detalles de publicacion</h1>
+                <h1 className='h1-details'>Detalles de publicación</h1>
             </div>
             <div style={{display:"flex"}}>
               <div className='div-details'>
@@ -45,12 +45,31 @@ function PostDetailsWindow({ isOpen, onRequestClose, title, posts, picture }) {
                   <h2 className='h2-details'>Longitud: {posts[0].lng}</h2>
                   <h2 className='h2-details'>Provincia: {posts[0].provincia}</h2>
                   <h2 className='h2-details'>Fecha de registro (YYYY-MM-DD): {posts[0].fecha}</h2>
+                  <div>
+                    <h2 className='h2-details'>Audio</h2>
+                    <audio controls className="player-postDetails">
+                        <source src={posts[0].audio} type="audio/mpeg"  />
+                        <source src={posts[0].audio} type="audio/wav"  />
+                        <source src={posts[0].audio} type="audio/mp4"  />
+                        <source ssrc={posts[0].audio} type="audio/ogg"  />
+                        Tu navegador no soporta la reproducción de audio.
+                    </audio>
+                  </div>
+                  <div>
+                    <h2 className='h2-details'>Foto de publicación</h2>
+                    {!posts[0].img && (
+                        <div className="squarePreviewDetails"></div>
+                    )}
+                    {posts[0].img && (   
+                      <img className="previewDetails" src={posts[0].img} alt="Vista previa de la imagen" />
+                    )}
+                  </div>
                   
                 </div>
                 
                   
               </div>
-              <div className="admin-mapSection">
+              <div className="details-mapSection">
                   <MapContainer className="map-details" center={position} zoom={zoom}>
                     <TileLayer
                       url = {urlLeaflet}
@@ -67,7 +86,7 @@ function PostDetailsWindow({ isOpen, onRequestClose, title, posts, picture }) {
             </div>
             
             <div className='buttonsYN-modal'>
-                <button className='close-button' onClick={onRequestClose}>Cerrar</button>
+                <button className='close-button-details' onClick={onRequestClose}>Cerrar</button>
             </div>
             
         </div>

@@ -159,8 +159,8 @@ function AdminPage() {
         posts[0].lat = parseFloat(coordenadasSplit[0]);
         posts[0].lng = parseFloat(coordenadasSplit[1]);
         setDetails(posts);
-        //console.log(publications[0].foto)
         setOpenDetailsW(true);
+        console.log(publications);
     }
 
     const resetFilters = () => {
@@ -216,7 +216,7 @@ function AdminPage() {
     return(
         <div>
             <header className='admin-header'>
-                <Link to={urlPort}>
+                <Link to='/'>
                     <button className='sign-out'>CERRAR SESION</button>
                 </Link>
             </header>
@@ -269,8 +269,9 @@ function AdminPage() {
                             <th>
                                 <input type="checkbox"></input>
                             </th>
+                            <th>ID</th>
                             <th>Titulo</th>
-                            <th>Descripcion</th>
+                            <th>Provincia</th>
                             <th>Autor</th>
                             <th style={{width:"400px"}}>Opciones</th>
                         </tr>
@@ -296,8 +297,9 @@ function AdminPage() {
                                                 }
                                             }}></input>
                                         </td>
+                                        <td>{val.codigoPublicacion}</td>
                                         <td>{val.titulo}</td>
-                                        <td>{val.descripcion}</td>
+                                        <td>{val.provincia}</td>
                                         <td>{val.autor}</td>
                                         <td>
                                             <button onClick={() => postDetails([{
@@ -308,10 +310,13 @@ function AdminPage() {
                                                 foto:val.foto,
                                                 coordenadas:val.coordenadas,
                                                 fecha: val.fecha,
-                                                provincia: val.provincia
-                                                }])}>VER DETALLES</button>
-                                            <button>MODIFICAR</button>
-                                            <button onClick={() => deletePostAdvertise(val.codigoPublicacion)}>ELIMINAR</button>
+                                                provincia: val.provincia,
+                                                audio:val.audio,
+                                                img:val.foto
+                                                }])} className='verDetalles-button'>VER DETALLES</button>
+                                            <button className='modificar-button'>MODIFICAR</button>
+                                            <button onClick={() => deletePostAdvertise(val.codigoPublicacion)} 
+                                            className='modificar-button'>ELIMINAR</button>
                                         </td>
                                                         
                                     </tr>
