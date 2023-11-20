@@ -51,7 +51,6 @@
     background-color:#0a0909;
     color: white;
     padding: 20px;
-    text-align: center;
     bottom: 0;
     width: 100%;
     height: 300px;
@@ -219,3 +218,29 @@ td {
     border-color: black;
 }
 
+
+.credits {
+    position: relative;
+    top:90%;
+    left:1%;
+    font-size: 13px;
+}
+
+.author {
+    color: #B0A705;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.author:hover {
+    animation: changeColor 3s infinite;
+}
+
+@keyframes changeColor {
+    0% { color: #ff7f50; } /* Color inicial */
+    25% { color: #4caf50; } /* Primer color de cambio */
+    50% { color: #2196f3; } /* Segundo color de cambio */
+    75% { color: #e91e63; } /* Tercer color de cambio */
+    100% { color: #ff7f50; } /* Vuelve al color inicial */
+}
