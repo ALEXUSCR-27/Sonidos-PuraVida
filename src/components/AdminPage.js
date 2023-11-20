@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useSyncExternalStore } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
 
@@ -7,7 +8,7 @@ import '../styles/admin.css'
 import ConfirmWindow from './ConfirmWindow';
 import AdvertiseWindow from './AdvertiseWindow';
 import PostDetailsWindow from './PostDetailsWindow';
-import { Link } from 'react-router-dom';
+import ModifyPostWindow from './ModifyPostWindow';
 
 
 function AdminPage() {
@@ -41,6 +42,13 @@ function AdminPage() {
 
     const closeDetailsW = () => {
         setOpenDetailsW(false);
+    };
+
+    const [openModifyW, setOpenModifyW] = useState(false);
+
+    const closeModifyW = () => {
+        setOpenModifyW(false);
+        reset();
     };
 
     const addPostReport = (postInfo) => {
@@ -163,6 +171,18 @@ function AdminPage() {
         console.log(publications);
     }
 
+    const modifyPost = (posts) => {
+        const expresion = /\(([^)]+)\)/;
+        const coordenadas = posts[0].coordenadas.match(expresion);
+        const coordenadasSplit = coordenadas[1].split(' ');
+        console.log(coordenadas);
+        posts[0].lat = parseFloat(coordenadasSplit[0]);
+        posts[0].lng = parseFloat(coordenadasSplit[1]);
+        setDetails(posts);
+        setOpenModifyW(true);
+        console.log(publications);
+    }
+
     const resetFilters = () => {
         setTitle("");
         setAuthor("");
@@ -223,7 +243,7 @@ function AdminPage() {
             <ConfirmWindow isOpen={openConfirmW} onRequestClose={closeConfirmW} msg={message} title={titleModal} deletePost={deletePost}/>
             <AdvertiseWindow isOpen={openAdvertiseW} onRequestClose={closeAdvertiseW} msg={message} title={titleModal}/>
             <PostDetailsWindow isOpen={openDetailsW} onRequestClose={closeDetailsW} title={titleModal} posts={details}/>
-
+            <ModifyPostWindow isOpen={openModifyW} onRequestClose={closeModifyW} modalTitle={titleModal} posts={details}/>
 
             <div className='form-admin'>
                 <div className='input-div'>
@@ -314,7 +334,18 @@ function AdminPage() {
                                                 audio:val.audio,
                                                 img:val.foto
                                                 }])} className='verDetalles-button'>VER DETALLES</button>
-                                            <button className='modificar-button'>MODIFICAR</button>
+                                            <button onClick={() => modifyPost([{
+                                                id:val.codigoPublicacion,
+                                                titulo:val.titulo,
+                                                descripcion:val.descripcion,
+                                                autor:val.autor,
+                                                foto:val.foto,
+                                                coordenadas:val.coordenadas,
+                                                fecha: val.fecha,
+                                                provincia: val.provincia,
+                                                audio:val.audio,
+                                                img:val.foto
+                                                }])} className='modificar-button'>MODIFICAR</button>
                                             <button onClick={() => deletePostAdvertise(val.codigoPublicacion)} 
                                             className='modificar-button'>ELIMINAR</button>
                                         </td>

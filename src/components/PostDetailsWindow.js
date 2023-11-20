@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-import '../styles/postDetailsW.css'
+import '../styles/postDetails-ModifyW.css'
 
 function PostDetailsWindow({ isOpen, onRequestClose, title, posts, picture }) {
 
