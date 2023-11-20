@@ -84,11 +84,28 @@ CREATE DEFINER=`admin`@`localhost` PROCEDURE `procedureModificarProvincia` (IN `
     WHERE pCodigoProvincia = codigoProvincia;
 END$$
 
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `procedureModificarPublicacion` (IN `pCodigoPublicacion` INT, IN `nuevaLatitud` DECIMAL(9,6), IN `nuevaLongitud` DECIMAL(9,6))  BEGIN
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `procedureModificarPublicacion` (
+    IN `pCodigoPublicacion` INT,
+    IN `nuevaLatitud` DECIMAL(9,6),
+    IN `nuevaLongitud` DECIMAL(9,6),
+    IN `nuevoTitulo` VARCHAR(255),
+    IN `nuevaProvincia` VARCHAR(255),
+    IN `nuevaDescripcion` VARCHAR(255),
+    IN `nuevoNombreAutor` VARCHAR(255),
+    IN `nuevoApellidoAutor` VARCHAR(255)
+)  
+BEGIN
     UPDATE Publicaciones
-    SET ubicacion = POINT(nuevaLatitud, nuevaLongitud)
-    WHERE pCodigoPublicacion = codigoPublicacion;
+    SET
+        ubicacion = POINT(nuevaLatitud, nuevaLongitud),
+        titulo = nuevoTitulo,
+        provincia = nuevaProvincia,
+        descripcion = nuevaDescripcion,
+        nombreAutor = nuevoNombreAutor,
+        apellidoAutor = nuevoApellidoAutor
+    WHERE codigoPublicacion = pCodigoPublicacion;
 END$$
+
 
 CREATE DEFINER=`admin`@`localhost` PROCEDURE `procedureFiltrarPublicaciones`(
     IN p_titulo VARCHAR(255),

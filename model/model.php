@@ -226,4 +226,29 @@ function uploadFilesInDB($data) {
 
 }
 
+function modifyPostInDB($data) {
+    $namePost = $data["namePost"];
+    $username = $data["username"];
+    $lastname = $data["lastname"];
+    $postDetails = $data["postDetails"];
+    $lat = (double)$data["lat"];
+    $long = (double)$data["long"];
+    $province = $data["province"];
+    $id = $data["id"];
+    try {
+        $sql_query = "CALL procedureModificarPublicacion('$id', $lat, $long, '$namePost', '$province', '$postDetails', '$username', '$lastname');";
+        echo json_encode(array("consulta"=>$sql_query));
+        $stmt = connectDB();
+        $stmt->query($sql_query);
+        if(!$stmt) {
+            die("Error en la consulta: " . mysqli_error($stmt));
+        }
+        $stmt->close();
+
+    }
+    catch (PDOException $e) {
+        echo "Error de consulta: " . $e->getMessage();
+    }
+}
+
 ?>

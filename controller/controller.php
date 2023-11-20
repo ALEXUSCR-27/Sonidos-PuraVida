@@ -44,5 +44,8 @@ function uploadFiles($data) {
     uploadFilesInDB($data);
 }
 
+function modifyPost($data) {
+    modifyPostInDB($data);
+}
 
 ?>

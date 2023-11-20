@@ -40,6 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_FILES;
             uploadFiles($data);
         }
+        if ($action === 'modifyPost') {
+            $JSONData = file_get_contents("php://input");
+            $data = json_decode($JSONData, true);
+            //echo json_encode(array("consulta"=>$data));
+            modifyPost($data);
+        }
         
     }
 }
