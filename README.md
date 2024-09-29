@@ -39,17 +39,44 @@
     <a href="https://github.com/ALEXUSCR-27/Sonidos-PuraVida"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
     
   </p>
 </div>
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/ALEXUSCR-27/Sonidos-PuraVida)
-
 “The sounds of Pura Vida” consists of a sound map of Costa Rica, with the aim of creating a memory of sounds of our country.
 A sound map is an acoustic technique to know the sounds of a place, community or city by locating these sounds geographically.
+
+## Getting started
+
+### To get the frontend running locally:
+
+- Clone the repository and switch to frontend branch (wip_frontend)
+- `npm install` to install all req dependencies
+- `npm start` to start the local server
+
+### To get the backend running locally:
+- Clone the repository and switch to the backend branch (wip_backend)
+- Install `Apache2` and `MariaDB` in an Ubuntu dist (24.04 recommended)
+- Prepare `MariaDB` to execute `sonidos_puravida.sql` script
+- Modify `uploaded_max_fileSize` and `post_max_size` configuration of Apache to 50M
+- `php -S localhost:8000` to start the local server
+
+### To get the page running on server (SSR):
+- Install all the backend dependencies `PHP - Apache - MariaDB`
+- Configure the Apache server
+- Configure the database and execute `sonidos_puravida.sql` script
+- Clone the repository and switch to the backend branch (wip_backend)
+- Clone the main branch in the server to serve static content
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [How to deploy an Apache web server quickly](https://www.redhat.com/sysadmin/install-apache-web-server)
+* [How to set the limits of File Uploads and POST in PHP/Apache](https://eorisis.com/blog/articles/tutorials/how-to-set-the-limits-of-file-uploads-and-post-in-php-apache)
+* [How To Install MariaDB on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-22-04)
+
 
 <p align="center"><a href="#readme-top">Back to top ☝🏼</a></p>
 
