@@ -33,19 +33,12 @@
   [![Static Badge](https://img.shields.io/badge/v10.6-purple?label=MariaDB)](https://mariadb.org/)
   [![Static Badge](https://img.shields.io/badge/v8.1.2-%23D3D3D3?label=PHP)](https://www.php.net/)
   [![Static Badge](https://img.shields.io/badge/v24.04.1-orange?label=Ubuntu)](https://ubuntu.com/)
-  
-  <p align="center">
-    <br />
-    <a href="https://github.com/ALEXUSCR-27/Sonidos-PuraVida"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    
-  </p>
+ 
 </div>
 
 ## About The Project
 
-“The sounds of Pura Vida” consists of a sound map of Costa Rica, with the aim of creating a memory of sounds of our country.
+“Sonidos del Pura Vida” consists of a sound map of Costa Rica, with the aim of creating a memory of sounds of our country.
 A sound map is an acoustic technique to know the sounds of a place, community or city by locating these sounds geographically.
 
 <div align="center">
