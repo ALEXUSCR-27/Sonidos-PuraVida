@@ -48,6 +48,13 @@
 “The sounds of Pura Vida” consists of a sound map of Costa Rica, with the aim of creating a memory of sounds of our country.
 A sound map is an acoustic technique to know the sounds of a place, community or city by locating these sounds geographically.
 
+<div align="center">
+  <a href="https://github.com/ALEXUSCR-27/Sonidos-PuraVida">
+      <img src="images/screenshot_01.png" alt="screenshot" width="auto" height="auto">
+  </a>
+</div>
+
+
 ## Getting started
 
 ### To get the frontend running locally:
